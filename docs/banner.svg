@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" role="img" aria-label="Afterthought: what happens after the answer">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="260" rx="24" fill="url(#bg)"/>
+  <!-- chat bubbles fading out -->
+  <g opacity="0.25" fill="#94a3b8">
+    <rect x="48" y="52" width="150" height="26" rx="13"/>
+    <rect x="48" y="90" width="110" height="26" rx="13"/>
+    <rect x="48" y="128" width="170" height="26" rx="13"/>
+    <rect x="48" y="166" width="90" height="26" rx="13"/>
+  </g>
+  <!-- arrow -->
+  <path d="M250 130 L330 130" stroke="url(#glow)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M316 112 L336 130 L316 148" fill="none" stroke="url(#glow)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- wiki cards -->
+  <g>
+    <rect x="370" y="44" width="180" height="76" rx="12" fill="#111827" stroke="#fbbf24" stroke-width="2"/>
+    <text x="386" y="72" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#fbbf24">lantern.md</text>
+    <text x="386" y="98" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#cbd5e1">^at-llm-63e59f1f9ac6</text>
+    <rect x="370" y="140" width="180" height="76" rx="12" fill="#111827" stroke="#f472b6" stroke-width="2"/>
+    <text x="386" y="168" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#f472b6">D-913ef655.md</text>
+    <text x="386" y="194" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#cbd5e1">[x] held  [ ] open</text>
+  </g>
+  <!-- title -->
+  <text x="600" y="118" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="800" fill="#f8fafc">Afterthought</text>
+  <text x="602" y="156" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24">what happens after the answer</text>
+  <text x="602" y="190" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" fill="#94a3b8">chats in. trustworthy wiki out. no server.</text>
+</svg>
