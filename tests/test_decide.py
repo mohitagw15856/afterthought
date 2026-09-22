@@ -102,9 +102,25 @@ def test_review_and_check(vault_dir, example_export, example_fixtures) -> None:
 def test_new_by_flags_is_idempotent(vault_dir) -> None:
     runner.invoke(app, ["init", "--vault", str(vault_dir), "--user", "Mo"])
     args = [
-        "new", "-q", "Which licence for Afterthought?", "-c", "MIT", "-o", "MIT", "-o", "Apache 2.0",
-        "-r", "Simplest for contributors.", "-a", "Nobody needs a patent grant | 0.7 | 2026-12-01",
-        "-a", "Contributors accept MIT", "--on", "2026-09-22", "--check-in", "10",
+        "new",
+        "-q",
+        "Which licence for Afterthought?",
+        "-c",
+        "MIT",
+        "-o",
+        "MIT",
+        "-o",
+        "Apache 2.0",
+        "-r",
+        "Simplest for contributors.",
+        "-a",
+        "Nobody needs a patent grant | 0.7 | 2026-12-01",
+        "-a",
+        "Contributors accept MIT",
+        "--on",
+        "2026-09-22",
+        "--check-in",
+        "10",
     ]
     r = _cli(*args, vault=vault_dir)
     assert r.exit_code == 0 and r.output.startswith("Recorded D-")

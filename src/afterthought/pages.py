@@ -38,9 +38,7 @@ class _Dumper(yaml.SafeDumper):
 
 
 def _repr_datetime(dumper: yaml.SafeDumper, value: datetime) -> yaml.Node:
-    return dumper.represent_scalar(
-        "tag:yaml.org,2002:str", value.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-    )
+    return dumper.represent_scalar("tag:yaml.org,2002:str", value.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"))
 
 
 def _repr_date(dumper: yaml.SafeDumper, value: date) -> yaml.Node:

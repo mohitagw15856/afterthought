@@ -68,7 +68,9 @@ def list_cmd(
 
 
 @decide_app.command()
-def show(decision_id: Annotated[str, typer.Argument(help="Decision id, e.g. D-913ef655")], vault: VaultOpt = None) -> None:
+def show(
+    decision_id: Annotated[str, typer.Argument(help="Decision id, e.g. D-913ef655")], vault: VaultOpt = None
+) -> None:
     """Print a decision page."""
     store = _store(vault)
     try:
@@ -84,7 +86,9 @@ def new(
     vault: VaultOpt = None,
     question: Annotated[str | None, typer.Option("--question", "-q")] = None,
     chosen: Annotated[str | None, typer.Option("--chosen", "-c")] = None,
-    option: Annotated[list[str] | None, typer.Option("--option", "-o", help="Repeat for each option considered.")] = None,
+    option: Annotated[
+        list[str] | None, typer.Option("--option", "-o", help="Repeat for each option considered.")
+    ] = None,
     reasoning: Annotated[str | None, typer.Option("--reasoning", "-r")] = None,
     assumption: Annotated[
         list[str] | None,
@@ -92,7 +96,9 @@ def new(
     ] = None,
     decider: Annotated[str | None, typer.Option("--decider")] = None,
     decided_on: Annotated[str | None, typer.Option("--on", help="Date decided, YYYY-MM-DD. Defaults to today.")] = None,
-    check_in: Annotated[int, typer.Option("--check-in", help="Days until assumptions without a date are checked.")] = 30,
+    check_in: Annotated[
+        int, typer.Option("--check-in", help="Days until assumptions without a date are checked.")
+    ] = 30,
 ) -> None:
     """Record a decision by hand. Prompts for anything not passed as a flag."""
     store = _store(vault)
@@ -145,7 +151,9 @@ def confirm(
     decision_id: Annotated[str, typer.Argument()],
     vault: VaultOpt = None,
     decider: Annotated[str | None, typer.Option("--decider")] = None,
-    check_in: Annotated[int | None, typer.Option("--check-in", help="Days from the decision date to check assumptions.")] = None,
+    check_in: Annotated[
+        int | None, typer.Option("--check-in", help="Days from the decision date to check assumptions.")
+    ] = None,
     check_by: Annotated[str | None, typer.Option("--check-by", help="Fixed check date, YYYY-MM-DD.")] = None,
     confidence: Annotated[
         list[str] | None,

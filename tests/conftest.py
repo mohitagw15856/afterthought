@@ -12,9 +12,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
-    parser.addoption(
-        "--live", action="store_true", default=False, help="run tests that call Anthropic"
-    )
+    parser.addoption("--live", action="store_true", default=False, help="run tests that call Anthropic")
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:

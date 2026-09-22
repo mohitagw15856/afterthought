@@ -29,9 +29,7 @@ ROLE_FOR = {
     "claude": "assistant",
     "chatgpt": "assistant",
 }
-INLINE_RE = re.compile(
-    r"^\s*\**\s*(user|assistant|human|ai)\s*\**\s*:\s*\**\s*(.+)$", re.IGNORECASE
-)
+INLINE_RE = re.compile(r"^\s*\**\s*(user|assistant|human|ai)\s*\**\s*:\s*\**\s*(.+)$", re.IGNORECASE)
 
 
 def parse(path: Path) -> Iterator[Message]:

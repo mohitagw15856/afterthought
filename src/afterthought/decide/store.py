@@ -214,9 +214,7 @@ class DecisionStore:
         a = decision.assumptions[index]
         if a.status == outcome and (note is None or a.note == note):
             return decision, False
-        updated = a.model_copy(
-            update={"status": outcome, "checked_on": today or date.today(), "note": note or a.note}
-        )
+        updated = a.model_copy(update={"status": outcome, "checked_on": today or date.today(), "note": note or a.note})
         assumptions = list(decision.assumptions)
         assumptions[index] = updated
         new = decision.model_copy(update={"assumptions": assumptions})

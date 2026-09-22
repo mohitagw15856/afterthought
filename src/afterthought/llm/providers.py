@@ -17,9 +17,7 @@ class DryRunProvider:
         payload = self.store.load(req.task, req.key)
         if payload is None:
             hint = self.store.save_request(req)
-            raise FixtureMissingError(
-                req.task, req.key, str(hint.with_suffix("").with_suffix(".json"))
-            )
+            raise FixtureMissingError(req.task, req.key, str(hint.with_suffix("").with_suffix(".json")))
         self.model = payload.get("model") or "fixture"
         return schema.model_validate(payload["response"])
 

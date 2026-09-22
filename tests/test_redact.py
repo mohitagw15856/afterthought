@@ -2,9 +2,7 @@ from afterthought.redact import redact
 
 
 def test_emails_and_allowlist() -> None:
-    text, rep = redact(
-        "mail me at a.b+c@example.co.uk or keep@ok.org", allow_emails=("keep@ok.org",)
-    )
+    text, rep = redact("mail me at a.b+c@example.co.uk or keep@ok.org", allow_emails=("keep@ok.org",))
     assert "[REDACTED:email]" in text and "keep@ok.org" in text
     assert rep.emails == 1
 
@@ -37,3 +35,9 @@ def test_idempotent() -> None:
     once, _ = redact("x@y.com 9f8e7d6c5b4a39281706f5e4d3c2b1a0 4111111111111111")
     twice, rep = redact(once)
     assert once == twice and rep.total == 0
+
+
+def test_key_in_prose() -> None:
+    text, rep = redact("and my API key is 9f8e7d6c5b4a39281706f5e4d3c2b1a0 in case that matters")
+    assert rep.tokens == 1 and "9f8e7d6c" not in text and "API key is [REDACTED:token]" in text
+    assert redact("the token is invalid")[1].tokens == 0

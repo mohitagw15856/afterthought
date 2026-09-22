@@ -18,11 +18,7 @@ def _page() -> Page:
         id="x",
         title="X",
         kind="concept",
-        sources=[
-            SourceRef(
-                file="f.json", message_id="m1", date=datetime(2026, 1, 2, tzinfo=UTC), span="abc"
-            )
-        ],
+        sources=[SourceRef(file="f.json", message_id="m1", date=datetime(2026, 1, 2, tzinfo=UTC), span="abc")],
         provenance=Provenance(origin="llm", model="m"),
         updated=datetime(2026, 1, 2, tzinfo=UTC),
         body="# X\n\n## Facts\n- one ^at-llm-abc\n\n## Notes\nhuman text\n",

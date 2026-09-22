@@ -12,9 +12,7 @@ class AnthropicProvider:
         try:
             import anthropic
         except ImportError as e:  # pragma: no cover
-            raise RuntimeError(
-                "Install the anthropic extra: pip install 'afterthought[anthropic]'"
-            ) from e
+            raise RuntimeError("Install the anthropic extra: pip install 'afterthought[anthropic]'") from e
         self._client = anthropic.Anthropic()
         self.model = model
         self.max_tokens = max_tokens

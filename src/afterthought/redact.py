@@ -23,9 +23,7 @@ TOKEN_PATTERNS = [
     re.compile(r"AIza[0-9A-Za-z_\-]{30,}"),
     re.compile(r"(?i)bearer\s+[A-Za-z0-9_\-.=]{20,}"),
     re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----"),
-    re.compile(
-        r"(?i)(?:api[_-]?key|secret|token|password|passwd)\s*[:=]\s*['\"]?([A-Za-z0-9_\-./+=]{12,})"
-    ),
+    re.compile(r"(?i)(?:api[_-]?key|secret|token|password|passwd)\s*[:=]\s*['\"]?([A-Za-z0-9_\-./+=]{12,})"),
 ]
 MARKER_RE = re.compile(r"\[REDACTED:(email|card|token)\]")
 

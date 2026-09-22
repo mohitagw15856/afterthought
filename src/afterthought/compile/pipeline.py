@@ -43,9 +43,7 @@ class CompileReport:
         return bool(self.stats.written) or self.state_changed
 
 
-def resolve_inputs(
-    inputs: list[Path], rules: IgnoreRules, fmt: str | None
-) -> tuple[list[tuple[Path, str]], list[str]]:
+def resolve_inputs(inputs: list[Path], rules: IgnoreRules, fmt: str | None) -> tuple[list[tuple[Path, str]], list[str]]:
     found: list[tuple[Path, str]] = []
     ignored: list[str] = []
     for inp in inputs:

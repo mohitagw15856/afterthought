@@ -30,10 +30,7 @@ def _blocks_to_text(content: object) -> str:
         if t == "text":
             out.append(block.get("text", ""))
         elif t == "tool_use":
-            out.append(
-                f"[tool_use {block.get('name')}] "
-                f"{json.dumps(block.get('input', {}), ensure_ascii=False)[:500]}"
-            )
+            out.append(f"[tool_use {block.get('name')}] {json.dumps(block.get('input', {}), ensure_ascii=False)[:500]}")
         elif t == "tool_result":
             inner = block.get("content")
             if isinstance(inner, list):

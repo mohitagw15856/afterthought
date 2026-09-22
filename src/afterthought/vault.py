@@ -137,9 +137,7 @@ class Vault:
         base = self.root / subdir if subdir else self.root
         if not base.exists():
             return []
-        return sorted(
-            p for p in base.rglob("*.md") if ".afterthought" not in p.parts and p.name != "index.md"
-        )
+        return sorted(p for p in base.rglob("*.md") if ".afterthought" not in p.parts and p.name != "index.md")
 
     def rel(self, path: Path) -> str:
         return path.relative_to(self.root).as_posix()

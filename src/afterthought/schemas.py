@@ -13,9 +13,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 Origin = Literal["human", "llm", "import", "system"]
-PageKind = Literal[
-    "project", "person", "tool", "concept", "question", "timeline", "index", "decision"
-]
+PageKind = Literal["project", "person", "tool", "concept", "question", "timeline", "index", "decision"]
 ClaimTag = Literal["SOURCED", "INFERRED", "UNVERIFIED"]
 
 

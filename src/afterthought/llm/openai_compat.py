@@ -15,14 +15,10 @@ class OpenAICompatProvider:
         try:
             import httpx
         except ImportError as e:  # pragma: no cover
-            raise RuntimeError(
-                "Install the openai extra: pip install 'afterthought[openai]'"
-            ) from e
+            raise RuntimeError("Install the openai extra: pip install 'afterthought[openai]'") from e
         self._httpx = httpx
         self.model = model
-        self.base_url = (
-            base_url or os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"
-        ).rstrip("/")
+        self.base_url = (base_url or os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
         self.api_key = api_key or os.environ.get("OPENAI_API_KEY", "")
 
     def complete_structured(self, req: StructuredRequest, schema: type[T]) -> T:
@@ -40,9 +36,7 @@ class OpenAICompatProvider:
         headers = {"Content-Type": "application/json"}
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
-        r = self._httpx.post(
-            f"{self.base_url}/chat/completions", json=body, headers=headers, timeout=120
-        )
+        r = self._httpx.post(f"{self.base_url}/chat/completions", json=body, headers=headers, timeout=120)
         r.raise_for_status()
         content = r.json()["choices"][0]["message"]["content"]
         return schema.model_validate(json.loads(content))

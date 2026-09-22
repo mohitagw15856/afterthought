@@ -28,9 +28,7 @@ class CompileState:
             "conversation": conversation,
         }
 
-    def record_batch(
-        self, key: str, *, conversation: str, spans: list[str], model: str | None
-    ) -> None:
+    def record_batch(self, key: str, *, conversation: str, spans: list[str], model: str | None) -> None:
         self.batches[key] = {"conversation": conversation, "spans": sorted(spans), "model": model}
 
     def save(self) -> bool:

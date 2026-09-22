@@ -57,9 +57,7 @@ def version() -> None:
 @app.command()
 def init(
     vault: VaultOpt = None,
-    user: Annotated[
-        str | None, typer.Option(help="Your name, stamped on pages you publish.")
-    ] = None,
+    user: Annotated[str | None, typer.Option(help="Your name, stamped on pages you publish.")] = None,
 ) -> None:
     """Create the vault folder layout, config and .afterthoughtignore."""
     v = Vault.resolve(vault)
@@ -74,24 +72,14 @@ def init(
 
 @app.command()
 def compile(
-    inputs: Annotated[
-        list[Path], typer.Argument(help="Export files or folders to ingest.", exists=True)
-    ],
+    inputs: Annotated[list[Path], typer.Argument(help="Export files or folders to ingest.", exists=True)],
     vault: VaultOpt = None,
-    dry_run: Annotated[
-        bool, typer.Option("--dry-run", help="Never call a model; replay fixtures only.")
-    ] = False,
-    record: Annotated[
-        bool, typer.Option("--record", help="Save live model responses as fixtures.")
-    ] = False,
-    fixtures: Annotated[
-        list[Path] | None, typer.Option("--fixtures", help="Extra fixture folder(s).")
-    ] = None,
+    dry_run: Annotated[bool, typer.Option("--dry-run", help="Never call a model; replay fixtures only.")] = False,
+    record: Annotated[bool, typer.Option("--record", help="Save live model responses as fixtures.")] = False,
+    fixtures: Annotated[list[Path] | None, typer.Option("--fixtures", help="Extra fixture folder(s).")] = None,
     fmt: Annotated[
         str | None,
-        typer.Option(
-            "--format", help="Force a format: chatgpt, claude, claude_code, slack, markdown."
-        ),
+        typer.Option("--format", help="Force a format: chatgpt, claude, claude_code, slack, markdown."),
     ] = None,
     verbose: Annotated[bool, typer.Option("--verbose", help="List every page written.")] = False,
 ) -> None:
@@ -145,9 +133,7 @@ def redact(
 
     text, rep = _redact(path.read_text(encoding="utf-8"))
     typer.echo(text, nl=False)
-    typer.echo(
-        f"\n[redacted {rep.emails} emails, {rep.tokens} tokens, {rep.cards} card numbers]", err=True
-    )
+    typer.echo(f"\n[redacted {rep.emails} emails, {rep.tokens} tokens, {rep.cards} card numbers]", err=True)
 
 
 @app.command()
@@ -161,9 +147,7 @@ def status(vault: VaultOpt = None) -> None:
 
     state = CompileState(v)
     typer.echo(f"Vault: {v.root}")
-    typer.echo(
-        f"Processed messages: {len(state.processed)}; extraction batches: {len(state.batches)}"
-    )
+    typer.echo(f"Processed messages: {len(state.processed)}; extraction batches: {len(state.batches)}")
     for sub in ("entities", "decisions", "questions", "timeline", "claims", "runs", "coach"):
         n = len(v.pages(sub))
         if n:

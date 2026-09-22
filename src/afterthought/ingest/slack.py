@@ -25,9 +25,7 @@ def _users(root: Path) -> dict[str, str]:
         return {}
 
 
-def _messages(
-    file: Path, channel: str, users: dict[str, str], source_name: str
-) -> Iterator[Message]:
+def _messages(file: Path, channel: str, users: dict[str, str], source_name: str) -> Iterator[Message]:
     try:
         items = json.loads(file.read_text(encoding="utf-8"))
     except json.JSONDecodeError:

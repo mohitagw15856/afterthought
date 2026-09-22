@@ -33,21 +33,17 @@ def test_end_to_end(vault_dir: Path, example_export: Path, example_fixtures: Pat
     assert lantern.provenance.origin == "llm"
 
     octopus = (vault_dir / "entities/tools/octopus-home-mini.md").read_text()
-    assert (
-        "UNVERIFIED: The Home Mini provides 30-second data at no charge. ^at-unverified-" in octopus
-    )
+    assert "UNVERIFIED: The Home Mini provides 30-second data at no charge. ^at-unverified-" in octopus
 
     for p in vault_dir.rglob("*.md"):
         text = p.read_text()
-        assert "mo.example@example.com" not in text and "sk_live_" not in text, p
+        assert "mo.example@example.com" not in text and "9f8e7d6c5b4a" not in text, p
         ids = [ln.rsplit("^", 1)[1] for ln in text.splitlines() if " ^at-" in ln]
         assert len(ids) == len(set(ids)), f"duplicate block id in {p}"
 
     idx = (vault_dir / "index.md").read_text()
     assert "[[entities/projects/lantern|Lantern]]" in idx
-    assert (vault_dir / "decisions/staged").is_dir() and len(
-        list((vault_dir / "decisions/staged").glob("D-*.md"))
-    ) == 4
+    assert (vault_dir / "decisions/staged").is_dir() and len(list((vault_dir / "decisions/staged").glob("D-*.md"))) == 4
     assert (vault_dir / "timeline/2026-03-04.md").exists()
     state = json.loads((v.state_dir / "compile.json").read_text())
     assert len(state["processed"]) == 13
@@ -73,20 +69,14 @@ def test_incremental(
     assert not (vault_dir / "entities/tools/vps.md").exists()
     full = copy_export(example_export, tmp_path / "full")
     _, second = _run(vault_dir, full, example_fixtures)
-    assert (
-        second.llm_calls == 1
-        and second.conversations_with_new == 1
-        and second.skipped_messages == 9
-    )
+    assert second.llm_calls == 1 and second.conversations_with_new == 1 and second.skipped_messages == 9
     assert (vault_dir / "entities/tools/vps.md").exists()
     lantern = (vault_dir / "entities/projects/lantern.md").read_text()
     assert lantern.count("- Lantern is a side project") == 1
     assert "collector stays on the Raspberry Pi" in lantern
 
 
-def test_human_sections_survive(
-    vault_dir: Path, example_export: Path, example_fixtures: Path
-) -> None:
+def test_human_sections_survive(vault_dir: Path, example_export: Path, example_fixtures: Path) -> None:
     _run(vault_dir, example_export, example_fixtures)
     page = vault_dir / "entities/tools/grafana.md"
     page.write_text(page.read_text() + "\n## Notes\nI prefer the dark theme.\n")
@@ -101,7 +91,5 @@ def test_ignore_rules(vault_dir: Path, example_export: Path, example_fixtures: P
     v = Vault(vault_dir)
     v.init()
     (vault_dir / ".afterthoughtignore").write_text("conversations.json\n")
-    report = compile_inputs(
-        v, [example_export], provider=DryRunProvider(FixtureStore([example_fixtures]))
-    )
+    report = compile_inputs(v, [example_export], provider=DryRunProvider(FixtureStore([example_fixtures])))
     assert report.ignored and report.conversations == 0
