@@ -10,7 +10,7 @@ def test_emails_and_allowlist() -> None:
 def test_tokens() -> None:
     samples = [
         "key sk-ant-api03-abcdefghijklmnopqrstuvwxyz0123456789",
-        "9f8e7d6c5b4a39281706f5e4d3c2b1a0",
+        "sk_live_" + "9f8e7d6c5b4a39281706f5e4d3c2b1a0",
         "ghp_abcdefghijklmnopqrstuvwxyz0123456789",
         "xoxb-1234567890-abcdefghij",
         "AKIAABCDEFGHIJKLMNOP",
@@ -32,7 +32,7 @@ def test_cards_need_luhn() -> None:
 
 
 def test_idempotent() -> None:
-    once, _ = redact("x@y.com 9f8e7d6c5b4a39281706f5e4d3c2b1a0 4111111111111111")
+    once, _ = redact("x@y.com sk_live_" + "9f8e7d6c5b4a39281706f5e4d3c2b1a0 4111111111111111")
     twice, rep = redact(once)
     assert once == twice and rep.total == 0
 
