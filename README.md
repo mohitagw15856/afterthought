@@ -226,7 +226,7 @@ uv run afterthought replay diff fix-test-run-a fix-test-run-b --vault demo-vault
 ```
 
 ```
-7 difference(s); outcome differs. First diverges at tool result of bash differs (step 3 vs 3).
+8 difference(s); outcome differs. First diverges at tool result of bash differs (step 3 vs 3).
 Likely cause of the different outcome: tool result of bash differs (step 3 vs 3)
 ```
 
