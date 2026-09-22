@@ -11,6 +11,7 @@ vault/
     config.json                  user name, provider, model, redaction allow-list
     state/compile.json           processed message spans and extraction batches
     state/rejected.json          staged decisions a person rejected; compile will not re-stage them
+    subscriptions/<name>/        git clones behind vault/shared/<name>/
     cache/llm/<task>/<key>.json  every model response, replayable in dry-run mode
   index.md                       generated home page listing every page
   entities/
@@ -29,7 +30,7 @@ vault/
   claims/<slug>.claims.json      verify: Claim records
   runs/                          replay recordings and viewers (module 5)
   coach/                         curriculum and progress (module 6)
-  shared/                        read-only subscriptions (module 4)
+  shared/<name>/                 read-only mirror of a subscribed repo (canonical/, conflicts/, by/)
 ```
 
 Everything is markdown or JSON. Git is the sync layer. Inputs are never copied into the vault; provenance points back to the original file by name, and `sources/index.json` records where it was on this machine.
@@ -116,6 +117,6 @@ In dry-run mode a missing fixture is an error, never a guess. The prompt is writ
 | compile | `compile/` | state ledger, extraction prompt and schema, page merge, pipeline |
 | decide | `decide/` | decision pages, confirm and reject, assumption review |
 | verify | `verify/` | claim extraction, evidence index, match and demand tagging, claims pages |
-| share | `share/` | planned |
+| share | `share/` | git wrapper, shared repo layout, publish and reconcile, subscriptions |
 | replay | `replay/` | planned |
 | coach | `coach/` | planned |

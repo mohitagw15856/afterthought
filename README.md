@@ -95,8 +95,8 @@ Run the compile a second time. It prints `No changes.` It already knows every me
 | 🧠 | **compile** | Reads your exported chats and writes a wiki: one page per project, person, tool and concept, plus decisions, open questions and a day-by-day timeline. Only new messages get processed. Every model-written line cites its source. | ✅ shipped |
 | ⚖️ | **decide** | A decision ledger. Choices spotted in your chats are staged for you to confirm. Each assumption gets a confidence and a check-by date, and `review` comes back later to ask: did it hold? | ✅ shipped |
 | 🔍 | **verify** | Splits any model output into atomic claims and tags each one `SOURCED`, `INFERRED` or `UNVERIFIED`. Never invents a citation. `--demand` asks the model to show its evidence, claim by claim. | ✅ shipped |
-| 🤝 | **share** | Publish chosen pages to a shared git repo with full provenance. Two people's pages on the same thing become a diff page, never a silent overwrite. `subscribe` pulls a teammate's pages read-only. | 🔜 next |
-| ⏪ | **replay** | A flight recorder for agent runs. Step through a Claude Code session, diff two runs, see exactly which tool result sent things sideways. Static HTML, open it from disk. | 🗓️ planned |
+| 🤝 | **share** | Publish chosen pages to a shared git repo with full provenance. Two people's pages on the same thing become a diff page, never a silent overwrite. `subscribe` pulls a teammate's pages read-only. | ✅ shipped |
+| ⏪ | **replay** | A flight recorder for agent runs. Step through a Claude Code session, diff two runs, see exactly which tool result sent things sideways. Static HTML, open it from disk. | 🔜 next |
 | 🎓 | **coach** | Interviews you about your real work, builds a 30-day curriculum of concrete things to try with AI, and tracks progress in the wiki so compile knows what you have learned. | 🗓️ planned |
 
 ## 🎒 A tour of the demo
@@ -207,6 +207,15 @@ Siyu is a lawyer from Beijing. [INFERRED] The VPS costs 4 pounds a month. [UNVER
 
 Every `SOURCED` tag links to a block in your vault, which links to a message in your export. The model never writes a citation; it can only point at evidence Afterthought handed it, and an index that does not exist is thrown away.
 
+### 🤝 Share it with the team, without a server
+
+```bash
+uv run afterthought share init ~/team-wiki --vault demo-vault --user Mo
+uv run afterthought share publish entities/projects entities/people --vault demo-vault
+```
+
+That is a git repo. Push it anywhere. A teammate runs `afterthought share subscribe <url>` and your pages appear under their `vault/shared/team/`, read-only, provenance intact. If Siyu publishes her own version of `lantern.md`, nothing gets overwritten: her copy lands under `by/siyu/`, yours stays canonical, and a `conflicts/entities/projects/lantern.md` page shows the diff until one of you publishes a matching version.
+
 ## 🛡️ How trust works
 
 Afterthought has one rule, and everything else falls out of it:
@@ -283,7 +292,7 @@ Everything is markdown or JSON. Git is the sync layer. Delete `.afterthought/` a
 - [x] 🧠 compile: chat-to-wiki compiler with incremental state and provenance
 - [x] ⚖️ decide: decision ledger, staged confirmations, assumption review
 - [x] 🔍 verify: claim extraction and `SOURCED` / `INFERRED` / `UNVERIFIED` tagging, with `--demand`
-- [ ] 🤝 share: git-based team mesh with diff pages and `subscribe`
+- [x] 🤝 share: git-based team mesh with diff pages and `subscribe`
 - [ ] ⏪ replay: agent flight recorder with a static HTML viewer
 - [ ] 🎓 coach: onboarding interview and 30-day curriculum
 

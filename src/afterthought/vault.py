@@ -105,6 +105,9 @@ class Vault:
             return json.loads(json.dumps(DEFAULT_CONFIG))
         return json.loads(self.config_path.read_text(encoding="utf-8"))
 
+    def save_config(self, cfg: dict[str, Any]) -> bool:
+        return self.write_json(self.config_path, cfg).changed
+
     def ignore_rules(self) -> IgnoreRules:
         return IgnoreRules.load(self.root)
 
