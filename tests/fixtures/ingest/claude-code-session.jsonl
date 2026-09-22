@@ -1,0 +1,5 @@
+{"type":"summary","summary":"ignored line"}
+{"type":"user","uuid":"u1","timestamp":"2026-05-01T10:00:00.000Z","sessionId":"sess-abc","message":{"role":"user","content":"Add a --verbose flag to the compile command"}}
+{"type":"assistant","uuid":"a1","timestamp":"2026-05-01T10:00:05.000Z","sessionId":"sess-abc","message":{"role":"assistant","content":[{"type":"text","text":"I will read the CLI first."},{"type":"tool_use","id":"t1","name":"Read","input":{"file_path":"src/afterthought/cli.py"}}]}}
+{"type":"user","uuid":"u2","timestamp":"2026-05-01T10:00:06.000Z","sessionId":"sess-abc","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"t1","content":[{"type":"text","text":"app = typer.Typer()"}]}]}}
+{"type":"assistant","uuid":"a2","timestamp":"2026-05-01T10:00:20.000Z","sessionId":"sess-abc","message":{"role":"assistant","content":[{"type":"text","text":"Added the flag and a test."}]}}

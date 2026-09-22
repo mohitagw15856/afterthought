@@ -1,0 +1,11 @@
+[
+  {
+    "uuid": "c0ffee00-1111-2222-3333-444455556666",
+    "name": "Vault naming",
+    "created_at": "2026-02-10T08:00:00Z",
+    "chat_messages": [
+      {"uuid": "m-1", "sender": "human", "text": "Should I call the folder vault or wiki?", "created_at": "2026-02-10T08:00:00Z", "content": [{"type": "text", "text": "Should I call the folder vault or wiki?"}]},
+      {"uuid": "m-2", "sender": "assistant", "text": "", "created_at": "2026-02-10T08:01:00Z", "content": [{"type": "text", "text": "Call it vault. Obsidian already uses that word, so people will know what it is."}]}
+    ]
+  }
+]

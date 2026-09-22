@@ -1,0 +1,194 @@
+{
+  "task": "compile.extract",
+  "key": "conversations-json-conv-lantern-01-3f2e8cc5",
+  "model": "hand-authored fixture",
+  "response": {
+    "summary": "The user started Lantern, a home energy dashboard fed by an Octopus Home Mini, chose PostgreSQL with TimescaleDB over InfluxDB for storage and Grafana over a custom UI, and left downsampling as an open question.",
+    "entities": [
+      {
+        "name": "Lantern",
+        "kind": "project",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Lantern is a side project: a home energy dashboard.",
+            "message_id": "conv-lantern-01-m01"
+          },
+          {
+            "text": "Lantern reads an Octopus Home Mini smart meter every 30 seconds and shows usage, cost and a forecast for the day.",
+            "message_id": "conv-lantern-01-m01"
+          },
+          {
+            "text": "Readings must be stored for at least two years.",
+            "message_id": "conv-lantern-01-m01"
+          },
+          {
+            "text": "At 30-second resolution Lantern will store roughly 1 million readings a year.",
+            "message_id": "conv-lantern-01-m02"
+          },
+          {
+            "text": "Storage will be PostgreSQL with the TimescaleDB extension.",
+            "message_id": "conv-lantern-01-m03"
+          },
+          {
+            "text": "Lantern runs on a Raspberry Pi 4.",
+            "message_id": "conv-lantern-01-m03"
+          },
+          {
+            "text": "The dashboard will use Grafana rather than a custom UI for now.",
+            "message_id": "conv-lantern-01-m05"
+          }
+        ]
+      },
+      {
+        "name": "Octopus Home Mini",
+        "kind": "tool",
+        "aliases": [
+          "Home Mini"
+        ],
+        "facts": [
+          {
+            "text": "Provides smart meter readings every 30 seconds through the Octopus API.",
+            "message_id": "conv-lantern-01-m01"
+          },
+          {
+            "text": "Octopus has changed the Home Mini API before.",
+            "message_id": "conv-lantern-01-m04"
+          },
+          {
+            "text": "The Home Mini provides 30-second data at no charge.",
+            "message_id": "conv-lantern-01-m07"
+          }
+        ]
+      },
+      {
+        "name": "PostgreSQL",
+        "kind": "tool",
+        "aliases": [
+          "Postgres"
+        ],
+        "facts": [
+          {
+            "text": "Chosen as Lantern's storage together with the TimescaleDB extension.",
+            "message_id": "conv-lantern-01-m03"
+          },
+          {
+            "text": "Easier to join readings against tariff tables than InfluxDB because it is relational.",
+            "message_id": "conv-lantern-01-m02"
+          }
+        ]
+      },
+      {
+        "name": "TimescaleDB",
+        "kind": "tool",
+        "aliases": [
+          "Timescale"
+        ],
+        "facts": [
+          {
+            "text": "Adds automatic time partitioning, continuous aggregates and compression to PostgreSQL.",
+            "message_id": "conv-lantern-01-m02"
+          },
+          {
+            "text": "Compression can shrink two years of readings to a few hundred megabytes.",
+            "message_id": "conv-lantern-01-m02"
+          },
+          {
+            "text": "Compression jobs can spike memory on a Raspberry Pi 4, so shared_buffers should be set conservatively.",
+            "message_id": "conv-lantern-01-m04"
+          }
+        ]
+      },
+      {
+        "name": "InfluxDB",
+        "kind": "tool",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Considered for Lantern storage: very fast ingest, but a second query language and a weaker story for joining with relational data.",
+            "message_id": "conv-lantern-01-m02"
+          }
+        ]
+      },
+      {
+        "name": "Grafana",
+        "kind": "tool",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Suggested by Priya for the Lantern dashboard instead of a custom UI.",
+            "message_id": "conv-lantern-01-m03"
+          },
+          {
+            "text": "Talks to Postgres natively and provides time-range pickers, alerting and annotations.",
+            "message_id": "conv-lantern-01-m04"
+          }
+        ]
+      },
+      {
+        "name": "Priya",
+        "kind": "person",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Runs the data team at the user's day job.",
+            "message_id": "conv-lantern-01-m03"
+          },
+          {
+            "text": "Suggested Grafana for the Lantern dashboard.",
+            "message_id": "conv-lantern-01-m03"
+          }
+        ]
+      },
+      {
+        "name": "Raspberry Pi 4",
+        "kind": "tool",
+        "aliases": [
+          "Pi 4",
+          "Pi"
+        ],
+        "facts": [
+          {
+            "text": "Hosts Lantern; a 4 GB model runs Postgres fine.",
+            "message_id": "conv-lantern-01-m04"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "question": "Which storage should Lantern use for two years of 30-second meter readings?",
+        "options": [
+          "PostgreSQL with TimescaleDB",
+          "InfluxDB"
+        ],
+        "chosen": "PostgreSQL with TimescaleDB",
+        "reasoning": "Familiar SQL, easy joins with tariff tables, automatic time partitioning, continuous aggregates and compression.",
+        "assumptions": [
+          "The Octopus Home Mini keeps providing 30-second data for free",
+          "A Raspberry Pi 4 can run Postgres comfortably"
+        ],
+        "decider": null,
+        "message_id": "conv-lantern-01-m03"
+      },
+      {
+        "question": "Should the Lantern dashboard use Grafana or a custom UI?",
+        "options": [
+          "Grafana",
+          "Custom UI"
+        ],
+        "chosen": "Grafana",
+        "reasoning": "Native Postgres support, time-range pickers, alerting and annotations for free; a custom UI can come later if the dashboard outgrows it.",
+        "assumptions": [],
+        "decider": null,
+        "message_id": "conv-lantern-01-m05"
+      }
+    ],
+    "questions": [
+      {
+        "text": "How to downsample two years of 30-second data for graphs without losing the peaks?",
+        "message_id": "conv-lantern-01-m05"
+      }
+    ]
+  }
+}

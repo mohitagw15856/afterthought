@@ -1,0 +1,106 @@
+{
+  "task": "compile.extract",
+  "key": "conversations-json-conv-lantern-03-4037f8f7",
+  "model": "hand-authored fixture",
+  "response": {
+    "summary": "After losing readings during two broadband outages, the user decided to move Postgres and Grafana to a small VPS and keep the collector on the Raspberry Pi with a local retry buffer.",
+    "entities": [
+      {
+        "name": "Lantern",
+        "kind": "project",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Home broadband dropped twice in one week and readings were lost.",
+            "message_id": "conv-lantern-03-m01"
+          },
+          {
+            "text": "Postgres and Grafana will move to a small VPS; the collector stays on the Raspberry Pi with a local retry buffer.",
+            "message_id": "conv-lantern-03-m03"
+          },
+          {
+            "text": "The hosting decision will be revisited in June if the VPS bill or SD card wear becomes a problem.",
+            "message_id": "conv-lantern-03-m03"
+          }
+        ]
+      },
+      {
+        "name": "Raspberry Pi 4",
+        "kind": "tool",
+        "aliases": [
+          "Pi"
+        ],
+        "facts": [
+          {
+            "text": "Will run only the Lantern collector after the move to a VPS.",
+            "message_id": "conv-lantern-03-m03"
+          },
+          {
+            "text": "A day of 30-second readings is about 3,000 rows and will not wear an SD card, but Postgres write-ahead logs would have.",
+            "message_id": "conv-lantern-03-m04"
+          }
+        ]
+      },
+      {
+        "name": "VPS",
+        "kind": "tool",
+        "aliases": [
+          "virtual private server"
+        ],
+        "facts": [
+          {
+            "text": "Will host Lantern's Postgres and Grafana.",
+            "message_id": "conv-lantern-03-m03"
+          },
+          {
+            "text": "Assumed to cost under 5 pounds a month.",
+            "message_id": "conv-lantern-03-m03"
+          }
+        ]
+      },
+      {
+        "name": "PostgreSQL",
+        "kind": "tool",
+        "aliases": [
+          "Postgres"
+        ],
+        "facts": [
+          {
+            "text": "Moving Postgres off the Pi removes the SD card write-ahead log wear risk.",
+            "message_id": "conv-lantern-03-m04"
+          }
+        ]
+      },
+      {
+        "name": "Grafana",
+        "kind": "tool",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Will move to the VPS with Postgres so the dashboard stays up during home broadband outages.",
+            "message_id": "conv-lantern-03-m03"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "question": "Where should Lantern's database and dashboard run: the home Raspberry Pi or a VPS?",
+        "options": [
+          "Stay on the Pi with a local buffer",
+          "Postgres and Grafana on a VPS, collector on the Pi",
+          "Everything on the VPS polling the Octopus cloud API"
+        ],
+        "chosen": "Postgres and Grafana on a VPS, collector stays on the Pi with a local retry buffer",
+        "reasoning": "The outages were broadband rather than power, so splitting the collector from the database keeps the dashboard available for the least change.",
+        "assumptions": [
+          "A small VPS costs under 5 pounds a month",
+          "The Pi collector can buffer a day of readings on its SD card"
+        ],
+        "decider": null,
+        "message_id": "conv-lantern-03-m03"
+      }
+    ],
+    "questions": []
+  }
+}

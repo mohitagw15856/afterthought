@@ -1,0 +1,109 @@
+{
+  "task": "compile.extract",
+  "key": "conversations-json-conv-lantern-02-162b4567",
+  "model": "hand-authored fixture",
+  "response": {
+    "summary": "The user learned how to downsample Lantern's 30-second readings without losing peaks and settled on 5-minute and 1-hour continuous aggregates that store mean, max and min.",
+    "entities": [
+      {
+        "name": "Lantern",
+        "kind": "project",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Lantern will keep 5-minute and 1-hour continuous aggregates storing mean, max and min per bucket.",
+            "message_id": "conv-lantern-02-m03"
+          },
+          {
+            "text": "Raw readings will be compressed after seven days.",
+            "message_id": "conv-lantern-02-m04"
+          },
+          {
+            "text": "Tariff changes will be marked on graphs as Grafana annotations.",
+            "message_id": "conv-lantern-02-m03"
+          }
+        ]
+      },
+      {
+        "name": "Time-series downsampling",
+        "kind": "concept",
+        "aliases": [
+          "downsampling"
+        ],
+        "facts": [
+          {
+            "text": "Averaging 30-second readings into 5-minute buckets hides short spikes such as a kettle.",
+            "message_id": "conv-lantern-02-m01"
+          },
+          {
+            "text": "Keeping mean, max and min per bucket preserves peaks when graphing: draw the mean as a line and the max as a faint band.",
+            "message_id": "conv-lantern-02-m02"
+          },
+          {
+            "text": "LTTB (largest triangle three buckets) picks visually important points instead of averaging.",
+            "message_id": "conv-lantern-02-m02"
+          }
+        ]
+      },
+      {
+        "name": "TimescaleDB",
+        "kind": "tool",
+        "aliases": [
+          "Timescale"
+        ],
+        "facts": [
+          {
+            "text": "Continuous aggregates maintain bucketed statistics automatically as new readings arrive.",
+            "message_id": "conv-lantern-02-m02"
+          },
+          {
+            "text": "The Timescale toolkit extension ships an lttb() function.",
+            "message_id": "conv-lantern-02-m02"
+          }
+        ]
+      },
+      {
+        "name": "Grafana",
+        "kind": "tool",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Has a plugin for LTTB downsampling.",
+            "message_id": "conv-lantern-02-m02"
+          },
+          {
+            "text": "Annotations can mark events such as deploys or tariff changes on graphs.",
+            "message_id": "conv-lantern-02-m03"
+          }
+        ]
+      },
+      {
+        "name": "Priya",
+        "kind": "person",
+        "aliases": [],
+        "facts": [
+          {
+            "text": "Her data team uses Grafana annotations to mark deploys.",
+            "message_id": "conv-lantern-02-m03"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "question": "How should Lantern downsample readings for graphs?",
+        "options": [
+          "Mean only per bucket",
+          "Mean, max and min per bucket in continuous aggregates",
+          "LTTB"
+        ],
+        "chosen": "Mean, max and min per bucket in 5-minute and 1-hour continuous aggregates",
+        "reasoning": "Peaks stay visible as a band above the mean and Timescale maintains the buckets automatically.",
+        "assumptions": [],
+        "decider": null,
+        "message_id": "conv-lantern-02-m03"
+      }
+    ],
+    "questions": []
+  }
+}

@@ -1,0 +1,5 @@
+[
+  {"type": "message", "user": "U01", "text": "Grafana 11 is out, worth upgrading the data team dashboards?", "ts": "1772323200.000100", "client_msg_id": "s-1"},
+  {"type": "message", "user": "U02", "text": "Yes, the new canvas panel is what we wanted. Ping me at sam@example.com when you start.", "ts": "1772323260.000200", "client_msg_id": "s-2"},
+  {"type": "message", "subtype": "channel_join", "user": "U02", "text": "<@U02> has joined the channel", "ts": "1772323300.000300"}
+]
