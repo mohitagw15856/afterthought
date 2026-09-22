@@ -24,7 +24,9 @@ vault/
   questions/<slug>.md            open questions
   timeline/<YYYY-MM-DD>.md       one page per day; `undated.md` for sources without timestamps
   sources/index.json             ingested files: format, local path, message count (local only, never published)
-  claims/                        verify outputs (module 3)
+  claims/<slug>.claims.md        verify: claims table with tags and citations
+  claims/<slug>.annotated.md     verify: the input with tags inline
+  claims/<slug>.claims.json      verify: Claim records
   runs/                          replay recordings and viewers (module 5)
   coach/                         curriculum and progress (module 6)
   shared/                        read-only subscriptions (module 4)
@@ -113,7 +115,7 @@ In dry-run mode a missing fixture is an error, never a guess. The prompt is writ
 | ingest | `ingest/` | one parser per export format, common `Message` model |
 | compile | `compile/` | state ledger, extraction prompt and schema, page merge, pipeline |
 | decide | `decide/` | decision pages, confirm and reject, assumption review |
-| verify | `verify/` | planned |
+| verify | `verify/` | claim extraction, evidence index, match and demand tagging, claims pages |
 | share | `share/` | planned |
 | replay | `replay/` | planned |
 | coach | `coach/` | planned |

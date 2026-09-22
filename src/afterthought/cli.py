@@ -10,6 +10,7 @@ import typer
 from . import __version__
 from .decide.cli import decide_app
 from .vault import Vault
+from .verify.cli import verify as _verify
 
 app = typer.Typer(
     name="afterthought",
@@ -41,6 +42,7 @@ def _echo_paths(label: str, paths: list[str], limit: int = 40) -> None:
 
 
 app.add_typer(decide_app, name="decide")
+app.command(name="verify")(_verify)
 
 
 @app.callback()

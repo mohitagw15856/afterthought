@@ -1,0 +1,49 @@
+{
+  "task": "verify.extract",
+  "key": "lantern-answer-8326d9a259da",
+  "model": "hand-authored fixture",
+  "response": {
+    "claims": [
+      {
+        "text": "Lantern reads an Octopus Home Mini smart meter every 30 seconds.",
+        "quote": "Lantern reads an Octopus Home Mini smart meter every 30 seconds.",
+        "kind": "factual"
+      },
+      {
+        "text": "Lantern's storage is PostgreSQL with the TimescaleDB extension.",
+        "quote": "Storage is PostgreSQL with the TimescaleDB extension",
+        "kind": "factual"
+      },
+      {
+        "text": "Raw readings are compressed after seven days.",
+        "quote": "raw readings are compressed after seven days",
+        "kind": "factual"
+      },
+      {
+        "text": "Siyu is a lawyer from Beijing.",
+        "quote": "Siyu is a lawyer from Beijing.",
+        "kind": "factual"
+      },
+      {
+        "text": "Grafana was chosen for the dashboard because Siyu recommended it.",
+        "quote": "Grafana was chosen for the dashboard because Siyu recommended it.",
+        "kind": "factual"
+      },
+      {
+        "text": "The VPS costs 4 pounds a month.",
+        "quote": "The VPS costs 4 pounds a month.",
+        "kind": "factual"
+      },
+      {
+        "text": "InfluxDB was rejected because it cannot store more than a year of data.",
+        "quote": "InfluxDB was rejected because it cannot store more than a year of data.",
+        "kind": "factual"
+      },
+      {
+        "text": "This is a sensible architecture for a hobby project.",
+        "quote": "this is a sensible architecture for a hobby project",
+        "kind": "opinion"
+      }
+    ]
+  }
+}

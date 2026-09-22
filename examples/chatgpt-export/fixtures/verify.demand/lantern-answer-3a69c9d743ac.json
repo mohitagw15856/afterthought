@@ -1,0 +1,51 @@
+{
+  "task": "verify.demand",
+  "key": "lantern-answer-3a69c9d743ac",
+  "model": "hand-authored fixture",
+  "response": {
+    "verdicts": [
+      {
+        "claim_index": 0,
+        "verdict": "sourced",
+        "evidence_index": 0,
+        "reasoning": null
+      },
+      {
+        "claim_index": 1,
+        "verdict": "sourced",
+        "evidence_index": 4,
+        "reasoning": null
+      },
+      {
+        "claim_index": 2,
+        "verdict": "sourced",
+        "evidence_index": 6,
+        "reasoning": null
+      },
+      {
+        "claim_index": 3,
+        "verdict": "inferred",
+        "evidence_index": null,
+        "reasoning": "Evidence says Siyu is a friend from Beijing, China and separately that she is a lawyer, so together they give the claim."
+      },
+      {
+        "claim_index": 4,
+        "verdict": "inferred",
+        "evidence_index": null,
+        "reasoning": "Evidence says Siyu suggested Grafana and that the dashboard will use Grafana rather than a custom UI, which supports the causal claim."
+      },
+      {
+        "claim_index": 5,
+        "verdict": "unverified",
+        "evidence_index": null,
+        "reasoning": null
+      },
+      {
+        "claim_index": 6,
+        "verdict": "unverified",
+        "evidence_index": null,
+        "reasoning": null
+      }
+    ]
+  }
+}

@@ -94,8 +94,8 @@ Run the compile a second time. It prints `No changes.` It already knows every me
 |---|---|---|---|
 | 🧠 | **compile** | Reads your exported chats and writes a wiki: one page per project, person, tool and concept, plus decisions, open questions and a day-by-day timeline. Only new messages get processed. Every model-written line cites its source. | ✅ shipped |
 | ⚖️ | **decide** | A decision ledger. Choices spotted in your chats are staged for you to confirm. Each assumption gets a confidence and a check-by date, and `review` comes back later to ask: did it hold? | ✅ shipped |
-| 🔍 | **verify** | Splits any model output into atomic claims and tags each one `SOURCED`, `INFERRED` or `UNVERIFIED`. Never invents a citation. `--demand` asks the model to show its evidence, claim by claim. | 🔜 next |
-| 🤝 | **share** | Publish chosen pages to a shared git repo with full provenance. Two people's pages on the same thing become a diff page, never a silent overwrite. `subscribe` pulls a teammate's pages read-only. | 🗓️ planned |
+| 🔍 | **verify** | Splits any model output into atomic claims and tags each one `SOURCED`, `INFERRED` or `UNVERIFIED`. Never invents a citation. `--demand` asks the model to show its evidence, claim by claim. | ✅ shipped |
+| 🤝 | **share** | Publish chosen pages to a shared git repo with full provenance. Two people's pages on the same thing become a diff page, never a silent overwrite. `subscribe` pulls a teammate's pages read-only. | 🔜 next |
 | ⏪ | **replay** | A flight recorder for agent runs. Step through a Claude Code session, diff two runs, see exactly which tool result sent things sideways. Static HTML, open it from disk. | 🗓️ planned |
 | 🎓 | **coach** | Interviews you about your real work, builds a 30-day curriculum of concrete things to try with AI, and tracks progress in the wiki so compile knows what you have learned. | 🗓️ planned |
 
@@ -181,6 +181,32 @@ And the page remembers:
 
 Decisions you have never revisited are just guesses with good posture. This fixes that.
 
+### 🔍 Fact-check an answer against your own vault
+
+`examples/verify/lantern-answer.md` is a plausible-sounding paragraph about Lantern. Some of it is true, some of it is a stretch, and some of it is invented. Ask verify:
+
+```bash
+uv run afterthought verify examples/verify/lantern-answer.md --vault demo-vault \
+    --dry-run --fixtures examples/chatgpt-export/fixtures --demand --show
+```
+
+```
+Claims: 7  SOURCED 3  INFERRED 2  UNVERIFIED 2
+  [0] SOURCED    Lantern reads an Octopus Home Mini smart meter every 30 seconds. -> [[entities/projects/lantern#^at-llm-63e59f1f9ac6-2]]
+  [3] INFERRED   Siyu is a lawyer from Beijing. -> Evidence says Siyu is a friend from Beijing, China and separately that she is a lawyer...
+  [5] UNVERIFIED The VPS costs 4 pounds a month.
+  [6] UNVERIFIED InfluxDB was rejected because it cannot store more than a year of data.
+```
+
+And the annotated copy reads like a marked essay:
+
+```markdown
+Lantern reads an Octopus Home Mini smart meter every 30 seconds. [SOURCED: [[entities/projects/lantern#^at-llm-63e59f1f9ac6-2]]]
+Siyu is a lawyer from Beijing. [INFERRED] The VPS costs 4 pounds a month. [UNVERIFIED]
+```
+
+Every `SOURCED` tag links to a block in your vault, which links to a message in your export. The model never writes a citation; it can only point at evidence Afterthought handed it, and an index that does not exist is thrown away.
+
 ## 🛡️ How trust works
 
 Afterthought has one rule, and everything else falls out of it:
@@ -256,7 +282,7 @@ Everything is markdown or JSON. Git is the sync layer. Delete `.afterthought/` a
 
 - [x] 🧠 compile: chat-to-wiki compiler with incremental state and provenance
 - [x] ⚖️ decide: decision ledger, staged confirmations, assumption review
-- [ ] 🔍 verify: claim extraction and `SOURCED` / `INFERRED` / `UNVERIFIED` tagging, with `--demand`
+- [x] 🔍 verify: claim extraction and `SOURCED` / `INFERRED` / `UNVERIFIED` tagging, with `--demand`
 - [ ] 🤝 share: git-based team mesh with diff pages and `subscribe`
 - [ ] ⏪ replay: agent flight recorder with a static HTML viewer
 - [ ] 🎓 coach: onboarding interview and 30-day curriculum

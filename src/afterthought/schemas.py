@@ -13,7 +13,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 Origin = Literal["human", "llm", "import", "system"]
-PageKind = Literal["project", "person", "tool", "concept", "question", "timeline", "index", "decision"]
+PageKind = Literal["project", "person", "tool", "concept", "question", "timeline", "index", "decision", "claims"]
 ClaimTag = Literal["SOURCED", "INFERRED", "UNVERIFIED"]
 
 
@@ -75,8 +75,10 @@ class Decision(BaseModel):
 class Claim(BaseModel):
     id: str
     text: str
+    quote: str | None = None
     tag: ClaimTag = "UNVERIFIED"
     citation: SourceRef | None = None
+    evidence: str | None = None
     reasoning: str | None = None
     span: tuple[int, int] = (0, 0)
     demanded: bool = False
