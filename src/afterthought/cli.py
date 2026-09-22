@@ -8,6 +8,7 @@ from typing import Annotated
 import typer
 
 from . import __version__
+from .decide.cli import decide_app
 from .vault import Vault
 
 app = typer.Typer(
@@ -37,6 +38,9 @@ def _echo_paths(label: str, paths: list[str], limit: int = 40) -> None:
         typer.echo(f"  {p}")
     if len(paths) > limit:
         typer.echo(f"  ... and {len(paths) - limit} more")
+
+
+app.add_typer(decide_app, name="decide")
 
 
 @app.callback()

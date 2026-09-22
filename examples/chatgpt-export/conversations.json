@@ -67,7 +67,7 @@
           "content": {
             "content_type": "text",
             "parts": [
-              "Postgres with Timescale it is. I'm assuming the Home Mini keeps giving 30-second data for free and that my Raspberry Pi 4 can run Postgres comfortably. Siyu (a friend from Shanghai, she's a lawyer who tinkers with home automation on weekends) suggested Grafana for the dashboard rather than building my own UI. Thoughts?"
+              "Postgres with Timescale it is. I'm assuming the Home Mini keeps giving 30-second data for free and that my Raspberry Pi 4 can run Postgres comfortably. Siyu (a friend from Beijing, she's a lawyer who tinkers with home automation on weekends) suggested Grafana for the dashboard rather than building my own UI. Thoughts?"
             ]
           },
           "metadata": {}

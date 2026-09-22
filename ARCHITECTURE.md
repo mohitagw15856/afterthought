@@ -10,6 +10,7 @@ vault/
   .afterthought/
     config.json                  user name, provider, model, redaction allow-list
     state/compile.json           processed message spans and extraction batches
+    state/rejected.json          staged decisions a person rejected; compile will not re-stage them
     cache/llm/<task>/<key>.json  every model response, replayable in dry-run mode
   index.md                       generated home page listing every page
   entities/
@@ -18,7 +19,7 @@ vault/
     tools/<slug>.md              one page per tool or library
     concepts/<slug>.md           one page per concept
   decisions/
-    <D-id>.md                    confirmed decisions
+    <D-id>.md                    confirmed decisions (frontmatter is the Decision schema)
     staged/<D-id>.md             candidate decisions extracted from chats, awaiting confirmation
   questions/<slug>.md            open questions
   timeline/<YYYY-MM-DD>.md       one page per day; `undated.md` for sources without timestamps
@@ -111,7 +112,7 @@ In dry-run mode a missing fixture is an error, never a guess. The prompt is writ
 | llm | `llm/` | provider protocol, fixtures, dry-run, Anthropic, OpenAI-compatible |
 | ingest | `ingest/` | one parser per export format, common `Message` model |
 | compile | `compile/` | state ledger, extraction prompt and schema, page merge, pipeline |
-| decide | `decide/` | planned |
+| decide | `decide/` | decision pages, confirm and reject, assumption review |
 | verify | `verify/` | planned |
 | share | `share/` | planned |
 | replay | `replay/` | planned |

@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
+from ..decide.render import render_decision
 from ..ingest.base import Conversation, Message
 from ..pages import (
     extract_wikilinks,
@@ -221,13 +222,13 @@ def stage_decision(
     model: str | None,
     stats: MergeStats,
 ) -> None:
+    from ..decide.store import DecisionStore
+
+    store = DecisionStore(vault)
     did = decision_id(conv, cand)
-    confirmed = vault.root / "decisions" / f"{did}.md"
-    if confirmed.exists():
-        return  # already confirmed or superseded; never re-stage
-    path = vault.root / "decisions" / "staged" / f"{did}.md"
+    if (store.confirmed_dir / f"{did}.md").exists() or did in store.rejected():
+        return  # confirmed, superseded or rejected by a person; never re-stage
     msg = by_message_id.get(cand.message_id)
-    src = source_ref(msg) if msg else None
     decision = Decision(
         id=did,
         question=cand.question.strip(),
@@ -236,60 +237,13 @@ def stage_decision(
         reasoning=cand.reasoning.strip(),
         assumptions=[Assumption(text=a.strip()) for a in cand.assumptions],
         decider=cand.decider,
-        source=src,
+        source=source_ref(msg) if msg else None,
         status="staged",
         decided_on=msg.ts.date() if msg and msg.ts else None,
         provenance=llm_provenance(model),
     )
-    span = msg.span if msg else None
-    counter = {"n": 0}
-
-    def tag(t: str) -> str:
-        if not span:
-            return unverified_line(t)
-        counter["n"] += 1
-        return tag_line(t, "llm", span, suffix=counter["n"] - 1)
-
-    lines = [
-        f"# {decision.question}",
-        "",
-        BANNER,
-        "",
-        "Status: staged (run `afterthought decide review` to confirm)",
-        "",
-    ]
-    lines += ["## Options"] + [f"- {tag(o)}" for o in decision.options] or ["- (none recorded)"]
-    lines += [
-        "",
-        "## Chosen",
-        f"- {tag(decision.chosen)}",
-        "",
-        "## Reasoning",
-        tag(decision.reasoning or "(none given)"),
-    ]
-    lines += ["", "## Assumptions"]
-    lines += [
-        f"- {tag(f'{a.text} (confidence {a.confidence:.2f}, check by: unset)')}"
-        for a in decision.assumptions
-    ] or ["- (none extracted)"]
-    lines += [
-        "",
-        "## Source",
-        conversation_source_line(conv)
-        if msg
-        else "- UNVERIFIED: message id not found in conversation",
-    ]
-    fm = decision.model_dump(mode="json", exclude_none=True)
-    fm = {
-        "title": decision.question,
-        "kind": "decision",
-        **fm,
-        "tags": ["afterthought", "decision", "staged"],
-    }
-    from ..pages import dump_frontmatter
-
-    text = f"---\n{dump_frontmatter(fm)}---\n" + "\n".join(lines) + "\n"
-    res = vault.write_text(path, text)
+    path = store.staged_dir / f"{did}.md"
+    res = vault.write_text(path, render_decision(decision, msg.span if msg else None))
     if res.created:
         stats.decisions_staged += 1
     stats.note(vault, path, res.changed)

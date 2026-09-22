@@ -146,7 +146,7 @@ RESPONSES = {
                 "aliases": [],
                 "facts": [
                     {
-                        "text": "A friend of the user from Shanghai, China.",
+                        "text": "A friend of the user from Beijing, China.",
                         "message_id": "conv-lantern-01-m03",
                     },
                     {
