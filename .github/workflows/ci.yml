@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen
+      - run: uv run ruff check src tests scripts
+      - run: uv run ruff format --check src tests scripts
+      - run: uv run pytest
+      - name: Demo compiles without a key and is idempotent
+        run: |
+          uv run afterthought compile examples/chatgpt-export/conversations.json --vault demo-vault --dry-run --fixtures examples/chatgpt-export/fixtures
+          uv run afterthought compile examples/chatgpt-export/conversations.json --vault demo-vault --dry-run --fixtures examples/chatgpt-export/fixtures | grep -q "No changes."
