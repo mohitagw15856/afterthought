@@ -28,7 +28,8 @@ vault/
   claims/<slug>.claims.md        verify: claims table with tags and citations
   claims/<slug>.annotated.md     verify: the input with tags inline
   claims/<slug>.claims.json      verify: Claim records
-  runs/                          replay recordings and viewers (module 5)
+  runs/<id>/                     replay: run.json, steps.jsonl, run.md, viewer.html
+  runs/<a>__vs__<b>/             replay: diff.md, diff.json, diff.html
   coach/                         curriculum and progress (module 6)
   shared/<name>/                 read-only mirror of a subscribed repo (canonical/, conflicts/, by/)
 ```
@@ -118,5 +119,5 @@ In dry-run mode a missing fixture is an error, never a guess. The prompt is writ
 | decide | `decide/` | decision pages, confirm and reject, assumption review |
 | verify | `verify/` | claim extraction, evidence index, match and demand tagging, claims pages |
 | share | `share/` | git wrapper, shared repo layout, publish and reconcile, subscriptions |
-| replay | `replay/` | planned |
+| replay | `replay/` | transcript and hook parsers, run store, static HTML viewers, run diff |
 | coach | `coach/` | planned |

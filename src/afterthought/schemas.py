@@ -13,7 +13,18 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 Origin = Literal["human", "llm", "import", "system"]
-PageKind = Literal["project", "person", "tool", "concept", "question", "timeline", "index", "decision", "claims"]
+PageKind = Literal[
+    "project",
+    "person",
+    "tool",
+    "concept",
+    "question",
+    "timeline",
+    "index",
+    "decision",
+    "claims",
+    "run",
+]
 ClaimTag = Literal["SOURCED", "INFERRED", "UNVERIFIED"]
 
 
@@ -89,6 +100,7 @@ class Step(BaseModel):
     ts: datetime | None = None
     kind: Literal["user", "assistant", "tool_call", "tool_result", "system"]
     name: str | None = None
+    ref: str | None = None
     input_hash: str = ""
     output_hash: str = ""
     content: str = ""
@@ -97,7 +109,10 @@ class Step(BaseModel):
 class Run(BaseModel):
     id: str
     source: Literal["claude_code", "jsonl_hook"]
+    source_file: str | None = None
+    title: str | None = None
     started: datetime | None = None
+    ended: datetime | None = None
     steps: list[Step] = Field(default_factory=list)
     outcome: str | None = None
     provenance: Provenance

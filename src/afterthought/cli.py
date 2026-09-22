@@ -9,6 +9,7 @@ import typer
 
 from . import __version__
 from .decide.cli import decide_app
+from .replay.cli import replay_app
 from .share.cli import share_app
 from .vault import Vault
 from .verify.cli import verify as _verify
@@ -44,6 +45,7 @@ def _echo_paths(label: str, paths: list[str], limit: int = 40) -> None:
 
 app.add_typer(decide_app, name="decide")
 app.add_typer(share_app, name="share")
+app.add_typer(replay_app, name="replay")
 app.command(name="verify")(_verify)
 
 

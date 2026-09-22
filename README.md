@@ -96,8 +96,8 @@ Run the compile a second time. It prints `No changes.` It already knows every me
 | ⚖️ | **decide** | A decision ledger. Choices spotted in your chats are staged for you to confirm. Each assumption gets a confidence and a check-by date, and `review` comes back later to ask: did it hold? | ✅ shipped |
 | 🔍 | **verify** | Splits any model output into atomic claims and tags each one `SOURCED`, `INFERRED` or `UNVERIFIED`. Never invents a citation. `--demand` asks the model to show its evidence, claim by claim. | ✅ shipped |
 | 🤝 | **share** | Publish chosen pages to a shared git repo with full provenance. Two people's pages on the same thing become a diff page, never a silent overwrite. `subscribe` pulls a teammate's pages read-only. | ✅ shipped |
-| ⏪ | **replay** | A flight recorder for agent runs. Step through a Claude Code session, diff two runs, see exactly which tool result sent things sideways. Static HTML, open it from disk. | 🔜 next |
-| 🎓 | **coach** | Interviews you about your real work, builds a 30-day curriculum of concrete things to try with AI, and tracks progress in the wiki so compile knows what you have learned. | 🗓️ planned |
+| ⏪ | **replay** | A flight recorder for agent runs. Step through a Claude Code session, diff two runs, see exactly which tool result sent things sideways. Static HTML, open it from disk. | ✅ shipped |
+| 🎓 | **coach** | Interviews you about your real work, builds a 30-day curriculum of concrete things to try with AI, and tracks progress in the wiki so compile knows what you have learned. | 🔜 next |
 
 ## 🎒 A tour of the demo
 
@@ -216,6 +216,22 @@ uv run afterthought share publish entities/projects entities/people --vault demo
 
 That is a git repo. Push it anywhere. A teammate runs `afterthought share subscribe <url>` and your pages appear under their `vault/shared/team/`, read-only, provenance intact. If Siyu publishes her own version of `lantern.md`, nothing gets overwritten: her copy lands under `by/siyu/`, yours stays canonical, and a `conflicts/entities/projects/lantern.md` page shows the diff until one of you publishes a matching version.
 
+### ⏪ Replay an agent run, then find out why the second one went wrong
+
+`examples/replay/` has two recordings of an agent asked to fix the same failing test. Run A fixes it. Run B does not.
+
+```bash
+uv run afterthought replay capture examples/replay/fix-test-run-a.jsonl examples/replay/fix-test-run-b.jsonl --vault demo-vault
+uv run afterthought replay diff fix-test-run-a fix-test-run-b --vault demo-vault
+```
+
+```
+7 difference(s); outcome differs. First diverges at tool result of bash differs (step 3 vs 3).
+Likely cause of the different outcome: tool result of bash differs (step 3 vs 3)
+```
+
+Same prompt, same first command. In run B the test runner came back with `ModuleNotFoundError: numpy` instead of the real assertion, and the agent spent its turn installing packages. Open `runs/<a>__vs__<b>/diff.html` from disk to step through both side by side, or `runs/<id>/viewer.html` to replay one. No server, no build step, works on a plane.
+
 ## 🛡️ How trust works
 
 Afterthought has one rule, and everything else falls out of it:
@@ -293,7 +309,7 @@ Everything is markdown or JSON. Git is the sync layer. Delete `.afterthought/` a
 - [x] ⚖️ decide: decision ledger, staged confirmations, assumption review
 - [x] 🔍 verify: claim extraction and `SOURCED` / `INFERRED` / `UNVERIFIED` tagging, with `--demand`
 - [x] 🤝 share: git-based team mesh with diff pages and `subscribe`
-- [ ] ⏪ replay: agent flight recorder with a static HTML viewer
+- [x] ⏪ replay: agent flight recorder with a static HTML viewer
 - [ ] 🎓 coach: onboarding interview and 30-day curriculum
 
 <details>

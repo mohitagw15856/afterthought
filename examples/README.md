@@ -21,3 +21,12 @@ Nothing in this folder refers to a real person, product decision or account.
 uv run afterthought verify examples/verify/lantern-answer.md --vault demo-vault \
     --dry-run --fixtures examples/chatgpt-export/fixtures --demand --show
 ```
+
+## replay
+
+Two hook-format recordings of an agent fixing the same failing test. Run A succeeds; in run B the first test command fails with a missing module and the run ends without a fix.
+
+```bash
+uv run afterthought replay capture examples/replay/*.jsonl --vault demo-vault
+uv run afterthought replay diff fix-test-run-a fix-test-run-b --vault demo-vault
+```
