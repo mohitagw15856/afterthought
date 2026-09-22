@@ -1,9 +1,9 @@
 {
   "task": "compile.extract",
-  "key": "conversations-json-conv-lantern-01-3f2e8cc5",
+  "key": "conversations-json-conv-lantern-01-a5dfbf44",
   "model": "hand-authored fixture",
   "response": {
-    "summary": "The user started Lantern, a home energy dashboard fed by an Octopus Home Mini, chose PostgreSQL with TimescaleDB over InfluxDB for storage and Grafana over a custom UI, and left downsampling as an open question.",
+    "summary": "The user started Lantern, a home energy dashboard fed by an Octopus Home Mini, chose PostgreSQL with TimescaleDB over InfluxDB for storage and Grafana (suggested by Siyu) over a custom UI, and left downsampling as an open question.",
     "entities": [
       {
         "name": "Lantern",
@@ -116,7 +116,7 @@
         "aliases": [],
         "facts": [
           {
-            "text": "Suggested by Priya for the Lantern dashboard instead of a custom UI.",
+            "text": "Suggested by Siyu for the Lantern dashboard instead of a custom UI.",
             "message_id": "conv-lantern-01-m03"
           },
           {
@@ -126,12 +126,16 @@
         ]
       },
       {
-        "name": "Priya",
+        "name": "Siyu",
         "kind": "person",
         "aliases": [],
         "facts": [
           {
-            "text": "Runs the data team at the user's day job.",
+            "text": "A friend of the user from Shanghai, China.",
+            "message_id": "conv-lantern-01-m03"
+          },
+          {
+            "text": "A lawyer who tinkers with home automation at weekends.",
             "message_id": "conv-lantern-01-m03"
           },
           {

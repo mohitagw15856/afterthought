@@ -38,7 +38,7 @@ def test_slack(ingest_fixtures: Path) -> None:
     assert detect_format(p) == "slack"
     msgs = list(load(p))
     assert len(msgs) == 2  # channel_join dropped
-    assert msgs[0].author == "Priya" and msgs[0].conversation_title == "#general"
+    assert msgs[0].author == "Siyu" and msgs[0].conversation_title == "#general"
     assert msgs[0].ts is not None
 
 

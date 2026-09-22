@@ -24,7 +24,7 @@ MODEL = "hand-authored fixture"
 
 RESPONSES = {
     "conv-lantern-01": {
-        "summary": "The user started Lantern, a home energy dashboard fed by an Octopus Home Mini, chose PostgreSQL with TimescaleDB over InfluxDB for storage and Grafana over a custom UI, and left downsampling as an open question.",
+        "summary": "The user started Lantern, a home energy dashboard fed by an Octopus Home Mini, chose PostgreSQL with TimescaleDB over InfluxDB for storage and Grafana (suggested by Siyu) over a custom UI, and left downsampling as an open question.",
         "entities": [
             {
                 "name": "Lantern",
@@ -131,7 +131,7 @@ RESPONSES = {
                 "aliases": [],
                 "facts": [
                     {
-                        "text": "Suggested by Priya for the Lantern dashboard instead of a custom UI.",
+                        "text": "Suggested by Siyu for the Lantern dashboard instead of a custom UI.",
                         "message_id": "conv-lantern-01-m03",
                     },
                     {
@@ -141,12 +141,16 @@ RESPONSES = {
                 ],
             },
             {
-                "name": "Priya",
+                "name": "Siyu",
                 "kind": "person",
                 "aliases": [],
                 "facts": [
                     {
-                        "text": "Runs the data team at the user's day job.",
+                        "text": "A friend of the user from Shanghai, China.",
+                        "message_id": "conv-lantern-01-m03",
+                    },
+                    {
+                        "text": "A lawyer who tinkers with home automation at weekends.",
                         "message_id": "conv-lantern-01-m03",
                     },
                     {
@@ -269,12 +273,12 @@ RESPONSES = {
                 ],
             },
             {
-                "name": "Priya",
+                "name": "Siyu",
                 "kind": "person",
                 "aliases": [],
                 "facts": [
                     {
-                        "text": "Her data team uses Grafana annotations to mark deploys.",
+                        "text": "Her law firm's IT team uses Grafana annotations to mark deploys.",
                         "message_id": "conv-lantern-02-m03",
                     },
                 ],

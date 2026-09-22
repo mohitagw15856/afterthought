@@ -56,7 +56,7 @@ provenance:
   created: 2026-03-04T09:12:00Z
   derived_from: [claude-opus-5]
 updated: 2026-03-05T17:40:00Z
-links: [Priya, Grafana]
+links: [siyu, grafana]
 ---
 # Lantern
 ...

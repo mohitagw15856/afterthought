@@ -1,6 +1,6 @@
 {
   "task": "compile.extract",
-  "key": "conversations-json-conv-lantern-02-162b4567",
+  "key": "conversations-json-conv-lantern-02-ed404696",
   "model": "hand-authored fixture",
   "response": {
     "summary": "The user learned how to downsample Lantern's 30-second readings without losing peaks and settled on 5-minute and 1-hour continuous aggregates that store mean, max and min.",
@@ -78,12 +78,12 @@
         ]
       },
       {
-        "name": "Priya",
+        "name": "Siyu",
         "kind": "person",
         "aliases": [],
         "facts": [
           {
-            "text": "Her data team uses Grafana annotations to mark deploys.",
+            "text": "Her law firm's IT team uses Grafana annotations to mark deploys.",
             "message_id": "conv-lantern-02-m03"
           }
         ]

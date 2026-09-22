@@ -67,7 +67,7 @@
           "content": {
             "content_type": "text",
             "parts": [
-              "Postgres with Timescale it is. I'm assuming the Home Mini keeps giving 30-second data for free and that my Raspberry Pi 4 can run Postgres comfortably. Priya (she runs the data team at my day job) suggested Grafana for the dashboard rather than building my own UI. Thoughts?"
+              "Postgres with Timescale it is. I'm assuming the Home Mini keeps giving 30-second data for free and that my Raspberry Pi 4 can run Postgres comfortably. Siyu (a friend from Shanghai, she's a lawyer who tinkers with home automation on weekends) suggested Grafana for the dashboard rather than building my own UI. Thoughts?"
             ]
           },
           "metadata": {}
@@ -88,7 +88,7 @@
           "content": {
             "content_type": "text",
             "parts": [
-              "Both assumptions are worth checking rather than trusting. Octopus has changed the Home Mini API before, and a Pi 4 with 4 GB runs Postgres fine but Timescale compression jobs can spike memory, so set shared_buffers conservatively.\n\nPriya's suggestion is a good one. Grafana talks to Postgres natively, gives you time-range pickers, alerting and annotations for free, and you can always build a custom UI later if the dashboard outgrows it. Start with Grafana."
+              "Both assumptions are worth checking rather than trusting. Octopus has changed the Home Mini API before, and a Pi 4 with 4 GB runs Postgres fine but Timescale compression jobs can spike memory, so set shared_buffers conservatively.\n\nSiyu's suggestion is a good one. Grafana talks to Postgres natively, gives you time-range pickers, alerting and annotations for free, and you can always build a custom UI later if the dashboard outgrows it. Start with Grafana."
             ]
           },
           "metadata": {}
@@ -187,7 +187,7 @@
           "content": {
             "content_type": "text",
             "parts": [
-              "That answers my open question from last week. I'll do mean plus max plus min in a continuous aggregate at 5 minutes, and a second one at 1 hour. Priya also mentioned that the data team uses Grafana annotations to mark deploys; I could mark tariff changes the same way."
+              "That answers my open question from last week. I'll do mean plus max plus min in a continuous aggregate at 5 minutes, and a second one at 1 hour. Siyu also mentioned that her law firm's IT team uses Grafana annotations to mark deploys; I could mark tariff changes the same way."
             ]
           },
           "metadata": {}
