@@ -40,6 +40,11 @@ class Progress:
         if r.changed:
             written.append(self.vault.rel(r.path))
         written += sync_to_wiki(self.vault)
+        from ..compile.merge import MergeStats, rebuild_index
+
+        stats = MergeStats()
+        rebuild_index(self.vault, stats)
+        written += [w for w in stats.written if w not in written]
         return written
 
     def find(self, items: list[CurriculumItem], ref: str) -> CurriculumItem:
