@@ -58,7 +58,7 @@ No API key. No sign-up. The demo replays recorded model responses, so it runs on
 
 ```bash
 git clone https://github.com/mohitagw15856/afterthought && cd afterthought
-uv sync
+uv sync                      # or, without the demo: pip install afterthought-cli
 
 uv run afterthought compile examples/chatgpt-export/conversations.json \
     --vault demo-vault --dry-run --fixtures examples/chatgpt-export/fixtures
@@ -329,15 +329,49 @@ Everything is markdown or JSON. Git is the sync layer. Delete `.afterthought/` a
 - [x] ⏪ replay: agent flight recorder with a static HTML viewer
 - [x] 🎓 coach: onboarding interview and 30-day curriculum
 
-<details>
-<summary>🎬 GIFs still to record</summary>
+## 🎬 Watch it
 
-1. `docs/gifs/compile.gif`: compiling the demo and opening the vault in Obsidian.
-2. `docs/gifs/provenance.gif`: clicking a `^at-llm-` block id through to its source.
-3. `docs/gifs/idempotent.gif`: second run prints `No changes.`
-4. `docs/gifs/decide-review.gif`: `decide review` walking through due assumptions.
-5. `docs/gifs/verify.gif`: the claims table for a model answer.
-6. `docs/gifs/replay.gif`: stepping through an agent run in the viewer.
+Recorded from the real demo with [vhs](https://github.com/charmbracelet/vhs); `scripts/record_gifs.sh` re-records them.
+
+<details open>
+<summary>🧠 compile the demo export</summary>
+
+![compile](docs/gifs/compile.gif)
+
+</details>
+
+<details>
+<summary>🧾 a block id resolving to its source</summary>
+
+![provenance](docs/gifs/provenance.gif)
+
+</details>
+
+<details>
+<summary>🔁 run it twice, nothing changes</summary>
+
+![idempotent](docs/gifs/idempotent.gif)
+
+</details>
+
+<details>
+<summary>⚖️ confirm a decision, then review its assumptions</summary>
+
+![decide review](docs/gifs/decide-review.gif)
+
+</details>
+
+<details>
+<summary>🔍 verify an answer against the vault</summary>
+
+![verify](docs/gifs/verify.gif)
+
+</details>
+
+<details>
+<summary>⏪ diff two agent runs</summary>
+
+![replay](docs/gifs/replay.gif)
 
 </details>
 

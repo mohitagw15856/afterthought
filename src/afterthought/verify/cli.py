@@ -21,6 +21,12 @@ def verify(
     as_json: Annotated[bool, typer.Option("--json", help="Print the claims as JSON instead of a summary.")] = False,
     no_write: Annotated[bool, typer.Option("--no-write", help="Do not write anything into the vault.")] = False,
     show: Annotated[bool, typer.Option("--show", help="Print the annotated text.")] = False,
+    threshold: Annotated[
+        float | None,
+        typer.Option(
+            "--threshold", min=0.0, max=1.0, help="Match strictness, 0 to 1 (config verify.threshold, default 0.5)."
+        ),
+    ] = None,
 ) -> None:
     """Extract claims from a model output and tag each SOURCED, INFERRED or UNVERIFIED."""
     from ..llm import FixtureMissingError, get_provider
@@ -51,7 +57,16 @@ def verify(
         raise typer.Exit(code=1)
 
     try:
-        report = verify_text(v, text, slug=slug, source_name=name, provider=provider, demand=demand, write=not no_write)
+        report = verify_text(
+            v,
+            text,
+            slug=slug,
+            source_name=name,
+            provider=provider,
+            demand=demand,
+            write=not no_write,
+            threshold=threshold,
+        )
     except FixtureMissingError as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(code=2) from None

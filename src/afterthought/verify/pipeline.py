@@ -68,10 +68,15 @@ def verify_text(
     provider: LLMProvider,
     demand: bool = False,
     write: bool = True,
+    threshold: float | None = None,
+    max_candidates: int | None = None,
 ) -> VerifyReport:
     if not vault.exists():
         vault.init()
     report = VerifyReport(slug=slug)
+    vcfg = vault.config().get("verify", {})
+    threshold = float(vcfg.get("threshold", 0.5)) if threshold is None else threshold
+    max_candidates = int(vcfg.get("candidates", 8)) if max_candidates is None else max_candidates
     text, rep = redact(text, allow_emails=tuple(vault.config().get("redact", {}).get("allow_emails", [])))
     report.redactions = rep.total
     text_hash = sha256_hex(text)
@@ -90,13 +95,13 @@ def verify_text(
             quote=ec.quote,
             span=locate(text, ec.quote),
         )
-        match = best_match(claim.text, index)
+        match = best_match(claim.text, index, threshold=threshold)
         if match is not None:
             claim = claim.model_copy(update={"tag": "SOURCED", "evidence": match.link, "citation": match.source})
         claims.append(claim)
 
     if demand and claims:
-        cand_lists: list[list[Evidence]] = [candidates(c.text, index) for c in claims]
+        cand_lists: list[list[Evidence]] = [candidates(c.text, index, k=max_candidates) for c in claims]
         flat: list[Evidence] = []
         seen: set[str] = set()
         for lst in cand_lists:

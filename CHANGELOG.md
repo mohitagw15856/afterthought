@@ -4,7 +4,15 @@ All notable changes to this project are documented here. The format follows Keep
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-09-23
+
+First public release: all six capabilities from the original brief, each a CLI subcommand with tests, docs and replayable demo fixtures. Published on PyPI as `afterthought-cli` (the import and command are `afterthought`).
+
 ### Added
+
+- `verify`: match strictness is configurable via `verify.threshold` in the vault config or `--threshold`; `verify.candidates` caps evidence per claim in demand mode.
+- Release workflow: pushing a `v*` tag builds, tests, publishes to PyPI via trusted publishing and creates a GitHub release.
+- Six README GIFs recorded with vhs; `scripts/record_gifs.sh` re-records them.
 
 - `coach`: onboarding coach. Eight-question interview, a model-generated N-day curriculum of concrete tasks tagged to the profile, `today`/`done`/`skip`/`status`, and a sync that writes learned skills to `coach/skills.md` and a managed `Learned` section on the person's page, run after every progress change and every compile.
 - `replay`: agent flight recorder. Captures Claude Code transcripts and a generic JSONL hook format into `runs/`, with a single-file HTML viewer per run, terminal replay, and `diff` that aligns two runs and names the tool result or context change most likely to have changed the outcome.

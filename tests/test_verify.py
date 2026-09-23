@@ -164,3 +164,28 @@ def test_cli_file_stdin_and_vault_page(vault_dir, example_export, example_fixtur
     assert r.exit_code == 2 and "No fixture" in r.output  # dry-run never guesses
     r = runner.invoke(app, ["verify", "does-not-exist.md", *common])
     assert r.exit_code == 1
+
+
+def test_threshold_is_configurable(vault_dir, example_export, example_fixtures) -> None:
+    v = _vault(vault_dir, example_export, example_fixtures)
+    text, slug, name = read_input(ANSWER, None)
+    strict = verify_text(
+        v,
+        text,
+        slug=slug,
+        source_name=name,
+        provider=DryRunProvider(FixtureStore([example_fixtures])),
+        write=False,
+        threshold=0.95,
+    )
+    assert strict.counts()["SOURCED"] < 3  # only word-for-word matches survive
+    cfg = v.config()
+    cfg["verify"]["threshold"] = 0.2
+    v.save_config(cfg)
+    loose = verify_text(
+        v, text, slug=slug, source_name=name, provider=DryRunProvider(FixtureStore([example_fixtures])), write=False
+    )
+    assert loose.counts()["SOURCED"] >= 3
+    common = ["--vault", str(vault_dir), "--dry-run", "--fixtures", str(example_fixtures), "--no-write"]
+    r = runner.invoke(app, ["verify", str(ANSWER), *common, "--threshold", "0.95"])
+    assert r.exit_code == 0 and "SOURCED 3" not in r.output

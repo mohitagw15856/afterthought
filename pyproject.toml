@@ -1,5 +1,5 @@
 [project]
-name = "afterthought"
+name = "afterthought-cli"
 version = "0.1.0"
 description = "What happens after the answer: compile, decide, verify, share, replay and coach your AI work into a trustworthy wiki."
 readme = "README.md"

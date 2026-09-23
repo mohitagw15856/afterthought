@@ -35,6 +35,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "user": None,
     "llm": {"provider": "anthropic", "model": "claude-opus-5", "fixtures": None},
     "redact": {"allow_emails": []},
+    "verify": {"threshold": 0.5, "candidates": 8},
 }
 
 

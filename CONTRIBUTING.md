@@ -38,3 +38,15 @@ uv run afterthought compile <export> --vault /tmp/v --record --fixtures tests/fi
 ```
 
 Check the recorded JSON for anything private before committing it.
+
+## Releasing
+
+1. Move the `Unreleased` notes in `CHANGELOG.md` under a new version heading with today's date and bump `version` in `pyproject.toml`.
+2. Commit, then `git tag vX.Y.Z && git push --tags`.
+3. The release workflow builds, runs the tests, publishes `afterthought-cli` to PyPI through trusted publishing and creates the GitHub release with the built files attached.
+
+The PyPI side needs a one-time pending publisher (owner `mohitagw15856`, repository `afterthought`, workflow `release.yml`, environment `pypi`).
+
+## Re-recording the GIFs
+
+`brew install vhs` then `scripts/record_gifs.sh`. The tapes live in `docs/gifs/tapes/`.
