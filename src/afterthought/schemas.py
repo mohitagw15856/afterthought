@@ -24,6 +24,7 @@ PageKind = Literal[
     "decision",
     "claims",
     "run",
+    "coach",
 ]
 ClaimTag = Literal["SOURCED", "INFERRED", "UNVERIFIED"]
 
@@ -127,3 +128,4 @@ class CurriculumItem(BaseModel):
     status: Literal["todo", "done", "skipped"] = "todo"
     evidence: SourceRef | None = None
     completed_on: date | None = None
+    note: str | None = None

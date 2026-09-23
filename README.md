@@ -97,7 +97,7 @@ Run the compile a second time. It prints `No changes.` It already knows every me
 | 🔍 | **verify** | Splits any model output into atomic claims and tags each one `SOURCED`, `INFERRED` or `UNVERIFIED`. Never invents a citation. `--demand` asks the model to show its evidence, claim by claim. | ✅ shipped |
 | 🤝 | **share** | Publish chosen pages to a shared git repo with full provenance. Two people's pages on the same thing become a diff page, never a silent overwrite. `subscribe` pulls a teammate's pages read-only. | ✅ shipped |
 | ⏪ | **replay** | A flight recorder for agent runs. Step through a Claude Code session, diff two runs, see exactly which tool result sent things sideways. Static HTML, open it from disk. | ✅ shipped |
-| 🎓 | **coach** | Interviews you about your real work, builds a 30-day curriculum of concrete things to try with AI, and tracks progress in the wiki so compile knows what you have learned. | 🔜 next |
+| 🎓 | **coach** | Interviews you about your real work, builds a 30-day curriculum of concrete things to try with AI, and tracks progress in the wiki so compile knows what you have learned. | ✅ shipped |
 
 ## 🎒 A tour of the demo
 
@@ -232,6 +232,23 @@ Likely cause of the different outcome: tool result of bash differs (step 3 vs 3)
 
 Same prompt, same first command. In run B the test runner came back with `ModuleNotFoundError: numpy` instead of the real assertion, and the agent spent its turn installing packages. Open `runs/<a>__vs__<b>/diff.html` from disk to step through both side by side, or `runs/<id>/viewer.html` to replay one. No server, no build step, works on a plane.
 
+### 🎓 Thirty days of real tasks, not tutorials
+
+Siyu has never used AI for work and does not trust it after it invented a clause number once. `examples/coach/answers.json` is her interview. The coach turns it into a month of tasks on her own documents, starting with redaction because she said confidentiality comes first:
+
+```bash
+uv run afterthought coach interview --answers examples/coach/answers.json --vault demo-vault --name Siyu
+uv run afterthought coach plan --vault demo-vault --dry-run --fixtures examples/chatgpt-export/fixtures --start 2026-09-01
+uv run afterthought coach today --vault demo-vault --as-of 2026-09-03
+uv run afterthought coach done 3 --vault demo-vault --as-of 2026-09-03
+```
+
+```
+- [x] Day 3: Ask for the summary again but tell the model to quote the clause number for every statement. Check each quote exists. [verify a claim against the source] (done 2026-09-03)
+```
+
+And now her person page in the wiki has a `## Learned` section saying she can verify a claim against the source, dated, traced to the task that proved it. The wiki learns what you have learned.
+
 ## 🛡️ How trust works
 
 Afterthought has one rule, and everything else falls out of it:
@@ -310,7 +327,7 @@ Everything is markdown or JSON. Git is the sync layer. Delete `.afterthought/` a
 - [x] 🔍 verify: claim extraction and `SOURCED` / `INFERRED` / `UNVERIFIED` tagging, with `--demand`
 - [x] 🤝 share: git-based team mesh with diff pages and `subscribe`
 - [x] ⏪ replay: agent flight recorder with a static HTML viewer
-- [ ] 🎓 coach: onboarding interview and 30-day curriculum
+- [x] 🎓 coach: onboarding interview and 30-day curriculum
 
 <details>
 <summary>🎬 GIFs still to record</summary>

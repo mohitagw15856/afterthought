@@ -138,6 +138,12 @@ def compile_inputs(
             state.mark(m.span, file=m.source_file, message_id=m.message_id, conversation=conv.id)
         state.record_batch(req.key, conversation=conv.id, spans=new_spans, model=model)
 
+    # what the person has learned to do, from coach progress, lands on their own page
+    from ..coach.progress import sync_to_wiki
+
+    for rel in sync_to_wiki(vault):
+        if rel not in stats.written:
+            stats.written.append(rel)
     rebuild_index(vault, stats)
     report.state_changed = state.save()
     if files:

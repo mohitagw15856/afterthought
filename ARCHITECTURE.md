@@ -30,7 +30,9 @@ vault/
   claims/<slug>.claims.json      verify: Claim records
   runs/<id>/                     replay: run.json, steps.jsonl, run.md, viewer.html
   runs/<a>__vs__<b>/             replay: diff.md, diff.json, diff.html
-  coach/                         curriculum and progress (module 6)
+  coach/profile.{json,md}        coach: interview answers (origin human)
+  coach/curriculum.{json,md}     coach: the plan and its progress (origin llm, tagged to the profile hash)
+  coach/skills.md                coach: skills shown, one line per skill, tagged to the proving task
   shared/<name>/                 read-only mirror of a subscribed repo (canonical/, conflicts/, by/)
 ```
 
@@ -73,7 +75,7 @@ Decision pages use the `Decision` schema in their frontmatter instead of `Page` 
 
 ### Managed and unmanaged sections
 
-`compile` owns three `## ` sections on entity pages: `Facts`, `Related` and `Sources`. They are rebuilt from data on every run. Any other section a human adds (for example `## Notes`) is preserved verbatim, in its original order, after the managed ones. Timeline pages are fully managed, one `## ` section per conversation.
+`compile` owns four `## ` sections on entity pages: `Facts`, `Related`, `Sources` and, on the vault owner's person page, `Learned` (written by `coach`). They are rebuilt from data on every run. Any other section a human adds (for example `## Notes`) is preserved verbatim, in its original order, after the managed ones. Timeline pages are fully managed, one `## ` section per conversation.
 
 ## Provenance model
 
@@ -120,4 +122,4 @@ In dry-run mode a missing fixture is an error, never a guess. The prompt is writ
 | verify | `verify/` | claim extraction, evidence index, match and demand tagging, claims pages |
 | share | `share/` | git wrapper, shared repo layout, publish and reconcile, subscriptions |
 | replay | `replay/` | transcript and hook parsers, run store, static HTML viewers, run diff |
-| coach | `coach/` | planned |
+| coach | `coach/` | interview, plan, progress, sync into person page |

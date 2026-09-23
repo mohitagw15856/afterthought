@@ -30,7 +30,7 @@ from .schemas import Page
 FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n?", re.DOTALL)
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
 BLOCK_ID_RE = re.compile(r"\s\^([A-Za-z0-9-]+)\s*$")
-MANAGED_SECTIONS = ("Facts", "Related", "Sources")
+MANAGED_SECTIONS = ("Facts", "Related", "Sources", "Learned")
 
 
 class _Dumper(yaml.SafeDumper):

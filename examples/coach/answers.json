@@ -1,0 +1,10 @@
+{
+  "role": "Commercial lawyer at a mid-sized firm in Beijing. I review and draft contracts, mostly supply and licensing agreements, in Chinese and English.",
+  "tasks": "Reviewing counterparty redlines, drafting first versions of agreements from our precedents, and writing short advice notes for clients.",
+  "tools": "Word with tracked changes, Outlook, PDF scans, Excel for fee estimates, and a document management system.",
+  "slow": "Comparing a counterparty's redline against our standard position and writing up every deviation takes an entire afternoon.",
+  "tried": "I asked a chatbot to summarise a 40-page agreement. It was fluent but it invented a clause number, so I stopped trusting it.",
+  "worries": "Confidentiality above all. I cannot paste client documents into a public tool. Also accuracy: a wrong clause reference is a real problem.",
+  "minutes": "25 minutes a day",
+  "goal": "Turn a redline review into a checked deviation table in under an hour, and draft an advice note that I only need to edit rather than write."
+}

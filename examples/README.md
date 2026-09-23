@@ -30,3 +30,12 @@ Two hook-format recordings of an agent fixing the same failing test. Run A succe
 uv run afterthought replay capture examples/replay/*.jsonl --vault demo-vault
 uv run afterthought replay diff fix-test-run-a fix-test-run-b --vault demo-vault
 ```
+
+## coach
+
+`answers.json` is Siyu's fictional interview: a commercial lawyer who worries about confidentiality and accuracy. The 30-day curriculum fixture is hand-authored by `scripts/write_coach_fixtures.py`.
+
+```bash
+uv run afterthought coach interview --answers examples/coach/answers.json --vault demo-vault --name Siyu
+uv run afterthought coach plan --vault demo-vault --dry-run --fixtures examples/chatgpt-export/fixtures
+```

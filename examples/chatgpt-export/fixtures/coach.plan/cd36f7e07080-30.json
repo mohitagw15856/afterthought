@@ -1,0 +1,189 @@
+{
+  "task": "coach.plan",
+  "key": "cd36f7e07080-30",
+  "model": "hand-authored fixture",
+  "response": {
+    "items": [
+      {
+        "day": 1,
+        "task": "Take one old, non-confidential precedent agreement and strip every party name, date and figure by hand. Save it as your practice document.",
+        "skill": "redact before sharing",
+        "why": "You cannot practise on client material, so make a safe copy first."
+      },
+      {
+        "day": 2,
+        "task": "Ask the assistant for a one-paragraph summary of the practice document. Then read the summary against the document and mark every sentence true or false.",
+        "skill": "summarise a document",
+        "why": "Your first summary invented a clause; this time you check it."
+      },
+      {
+        "day": 3,
+        "task": "Ask for the summary again but tell the model to quote the clause number for every statement. Check each quote exists.",
+        "skill": "verify a claim against the source",
+        "why": "Forcing citations makes invented clauses easy to catch."
+      },
+      {
+        "day": 4,
+        "task": "Ask the assistant to list every defined term in the practice document as a two-column table: term, clause where defined.",
+        "skill": "structured extraction",
+        "why": "Tables are easier to check than prose."
+      },
+      {
+        "day": 5,
+        "task": "Write down, in one paragraph, the three things you always look for in a supply agreement redline. Save it as your standard position note.",
+        "skill": "write a reusable prompt",
+        "why": "The model needs your standard position in writing before it can compare against it."
+      },
+      {
+        "day": 6,
+        "task": "Give the model your standard position note and the practice document. Ask which of the three points the document meets and which clause proves it.",
+        "skill": "verify a claim against the source",
+        "why": "A first small version of the deviation review."
+      },
+      {
+        "day": 7,
+        "task": "Ask the assistant to draft a three-sentence client email explaining one clause in plain language. Edit it until you would send it.",
+        "skill": "draft then edit",
+        "why": "Drafting to edit rather than from scratch is the habit you want."
+      },
+      {
+        "day": 8,
+        "task": "Make a second copy of the practice document and change five clauses by hand. Ask the model to list the differences between the two copies.",
+        "skill": "compare two versions",
+        "why": "This is the redline comparison, on material you control."
+      },
+      {
+        "day": 9,
+        "task": "Check the model's difference list against your five changes. Note what it missed and what it invented.",
+        "skill": "review model output critically",
+        "why": "Knowing the failure modes is what makes the tool usable."
+      },
+      {
+        "day": 10,
+        "task": "Ask for the difference list again as a table: clause, our wording, their wording, significance (high, medium, low). Check the significance column.",
+        "skill": "structured extraction",
+        "why": "The deviation table is the artefact you want at the end."
+      },
+      {
+        "day": 11,
+        "task": "Write a reusable prompt that produces the deviation table from any two documents. Save it in your notes.",
+        "skill": "write a reusable prompt",
+        "why": "A saved prompt turns a good result into a repeatable one."
+      },
+      {
+        "day": 12,
+        "task": "Ask the model to explain one clause of the practice document to a non-lawyer in five sentences. Check every sentence against the clause.",
+        "skill": "summarise a document",
+        "why": "Plain-language explanation is most of an advice note."
+      },
+      {
+        "day": 13,
+        "task": "Redact a real, closed matter's agreement using find and replace for names, dates and figures. Check it twice before it leaves your machine.",
+        "skill": "redact before sharing",
+        "why": "A real document, made safe, gives realistic practice."
+      },
+      {
+        "day": 14,
+        "task": "Run your saved deviation prompt on the redacted real agreement against your standard position note. Check every row.",
+        "skill": "verify a claim against the source",
+        "why": "First real run of the workflow, on safe material."
+      },
+      {
+        "day": 15,
+        "task": "Ask the assistant to draft a short advice note from the checked deviation table. Edit it to your standard.",
+        "skill": "draft then edit",
+        "why": "Table in, note out: the second half of your goal."
+      },
+      {
+        "day": 16,
+        "task": "Time yourself: redact, run the deviation prompt, check, draft the note. Write down how long each step took.",
+        "skill": "review model output critically",
+        "why": "You cannot improve the hour without measuring it."
+      },
+      {
+        "day": 17,
+        "task": "Ask the model to list the questions it would need answered before it could assess a clause it flagged. Answer them yourself.",
+        "skill": "review model output critically",
+        "why": "Good questions from the model show where it is guessing."
+      },
+      {
+        "day": 18,
+        "task": "Ask for a fee estimate structure for a redline review as an Excel-ready table: task, hours, rate. Adjust the hours to reality.",
+        "skill": "structured extraction",
+        "why": "Estimates are structured extraction too."
+      },
+      {
+        "day": 19,
+        "task": "Take a scanned PDF from a closed matter, redact it, and ask the assistant to transcribe one page. Compare against the scan.",
+        "skill": "verify a claim against the source",
+        "why": "Scans are where transcription errors hide."
+      },
+      {
+        "day": 20,
+        "task": "Ask the model to translate one redacted clause from Chinese to English and back. Note what changed in meaning.",
+        "skill": "review model output critically",
+        "why": "Round-trip translation exposes drift."
+      },
+      {
+        "day": 21,
+        "task": "Give the model two versions of your own standard position note and ask which is clearer and why. Pick one.",
+        "skill": "compare two versions",
+        "why": "Your own writing benefits from the same comparison."
+      },
+      {
+        "day": 22,
+        "task": "Write a prompt that drafts an advice note from a deviation table in your house style. Include two example paragraphs of your real writing (redacted).",
+        "skill": "write a reusable prompt",
+        "why": "Examples of your voice beat descriptions of it."
+      },
+      {
+        "day": 23,
+        "task": "Run the full workflow on a second redacted closed matter. Time it again and compare with day 16.",
+        "skill": "review model output critically",
+        "why": "Second measurement shows whether the saved prompts help."
+      },
+      {
+        "day": 24,
+        "task": "Ask the assistant to find every clause in the redacted agreement that references another clause, and check the references resolve.",
+        "skill": "verify a claim against the source",
+        "why": "Cross-reference checking is tedious for people and cheap for models."
+      },
+      {
+        "day": 25,
+        "task": "Draft a one-page internal note on how you now review redlines with AI, including what you never paste in. Edit until a colleague could follow it.",
+        "skill": "draft then edit",
+        "why": "Writing the process down protects confidentiality and spreads the skill."
+      },
+      {
+        "day": 26,
+        "task": "Ask the model to critique your internal note as a sceptical senior partner would. Address two of its points.",
+        "skill": "review model output critically",
+        "why": "Adversarial review is one of the best uses of the tool."
+      },
+      {
+        "day": 27,
+        "task": "Build a checklist of the model's failure modes you have seen this month: invented clauses, missed changes, wrong significance. Keep it next to your prompts.",
+        "skill": "review model output critically",
+        "why": "A failure checklist is your quality control."
+      },
+      {
+        "day": 28,
+        "task": "Run the deviation prompt with the checklist appended, telling the model to flag anything it is unsure about. See whether the flags are useful.",
+        "skill": "write a reusable prompt",
+        "why": "Asking for uncertainty gets you fewer confident errors."
+      },
+      {
+        "day": 29,
+        "task": "On a redacted matter, produce the deviation table and advice note end to end, checking each row against the source before drafting.",
+        "skill": "verify a claim against the source",
+        "why": "Dress rehearsal for the real thing."
+      },
+      {
+        "day": 30,
+        "task": "Write a short review: what the workflow now takes in minutes, which steps still need your judgement, and what you will try next month.",
+        "skill": "draft then edit",
+        "why": "Reflection turns 30 days of tasks into a habit."
+      }
+    ]
+  }
+}

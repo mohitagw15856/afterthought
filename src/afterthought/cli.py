@@ -8,6 +8,7 @@ from typing import Annotated
 import typer
 
 from . import __version__
+from .coach.cli import coach_app
 from .decide.cli import decide_app
 from .replay.cli import replay_app
 from .share.cli import share_app
@@ -46,6 +47,7 @@ def _echo_paths(label: str, paths: list[str], limit: int = 40) -> None:
 app.add_typer(decide_app, name="decide")
 app.add_typer(share_app, name="share")
 app.add_typer(replay_app, name="replay")
+app.add_typer(coach_app, name="coach")
 app.command(name="verify")(_verify)
 
 
